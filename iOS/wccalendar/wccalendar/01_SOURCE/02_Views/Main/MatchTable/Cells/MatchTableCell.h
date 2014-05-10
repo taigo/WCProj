@@ -1,0 +1,18 @@
+//
+//  MatchTableCell.h
+//  wccalendar
+//
+//  Created by Tai Truong on 5/10/14.
+//  Copyright (c) 2014 Tai Truong. All rights reserved.
+//
+
+#import "CommonTableViewCell.h"
+
+@interface MatchTableCell : CommonTableViewCell
+@property (strong, nonatomic) UILabel *dateLbl;
+@property (strong, nonatomic) UILabel *timeLbl;
+@property (strong, nonatomic) UILabel *team1_NameLbl;
+@property (strong, nonatomic) UILabel *team2_NameLbl;
+@property (strong, nonatomic) UIImageView *team1_ImgView;
+@property (strong, nonatomic) UIImageView *team2_ImgView;
+@end
