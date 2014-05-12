@@ -13,9 +13,10 @@
 
 @interface TeamModel : NSManagedObject
 
-@property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * imageUrl;
+@property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * teamID;
+@property (nonatomic, retain) NSString * initialTitle;
 @property (nonatomic, retain) NSSet *matchs;
 @end
 

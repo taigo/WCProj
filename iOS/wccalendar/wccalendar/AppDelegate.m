@@ -13,6 +13,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     // Override point for customization after application launch.
     UIStoryboard *homeStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ViewController *controller = [homeStoryboard instantiateViewControllerWithIdentifier:StoryboardIDMainVC];

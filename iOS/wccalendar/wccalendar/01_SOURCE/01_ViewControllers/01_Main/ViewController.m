@@ -10,11 +10,14 @@
 #import "AppViewController.h"
 #import "MatchTableCell.h"
 #import "CommonHeaderView.h"
+#import "TeamFilterViewController.h"
 
-@interface ViewController () <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
+@interface ViewController () <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, CommonHeaderDelegate, TeamFilterDelegate>
 @property (weak, nonatomic) IBOutlet CommonHeaderView *headerView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+
+@property (strong, nonatomic) TeamModel *filteredTeam;
 @end
 
 @implementation ViewController
@@ -22,6 +25,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _filteredTeam = nil;
 	// Do any additional setup after loading the view, typically from a nib.
     if ([self.fetchedResultsController.fetchedObjects count] == 0) {
         [self addSampleData];
@@ -39,33 +43,41 @@
 
 -(void)addSampleData
 {
-    // add team
-    NSManagedObjectContext *managedObjectContext = [AppViewController Shared].managedObjectContext;
-    TeamModel *team1 = [NSEntityDescription insertNewObjectForEntityForName:WC_TEAM_MODEL inManagedObjectContext:managedObjectContext];
-    team1.name = @"BRA";
-    team1.imageUrl = @"bra.png";
     
-    TeamModel *team2 = [NSEntityDescription insertNewObjectForEntityForName:WC_TEAM_MODEL inManagedObjectContext:managedObjectContext];
-    team2.name = @"CRO";
-    team2.imageUrl = @"cro.png";
+        // add team
+        NSManagedObjectContext *managedObjectContext = [AppViewController Shared].managedObjectContext;
+        TeamModel *team1 = [NSEntityDescription insertNewObjectForEntityForName:WC_TEAM_MODEL inManagedObjectContext:managedObjectContext];
+        team1.name = @"BRA";
+        team1.imageUrl = @"bra.png";
+        
+        TeamModel *team2 = [NSEntityDescription insertNewObjectForEntityForName:WC_TEAM_MODEL inManagedObjectContext:managedObjectContext];
+        team2.name = @"CRO";
+        team2.imageUrl = @"cro.png";
     
-    // add match
-    MatchItem *match1 = [NSEntityDescription insertNewObjectForEntityForName:WC_MATCH_MODEL inManagedObjectContext:managedObjectContext];
-    match1.time = [NSDate date];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    TTLog(@"%@", match1.time);
-    formatter.dateFormat = @"yyyy/MM/dd";
-    NSString *dateStr = [formatter stringFromDate:match1.time];
-    formatter.dateFormat = @"yyyy/MM/dd";
-    match1.day = [formatter dateFromString:dateStr];
-    [match1 setTeam1:team1];
-    [match1 setTeam2:team2];
-    // add match to team
-    [team1 addMatchsObject:match1];
-    [team2 addMatchsObject:match1];
+    for (NSInteger i = 0; i < 5; i++) {
+        // add match
+        MatchItem *match1 = [NSEntityDescription insertNewObjectForEntityForName:WC_MATCH_MODEL inManagedObjectContext:managedObjectContext];
+        match1.time = [NSDate date];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        TTLog(@"%@", match1.time);
+        formatter.dateFormat = @"yyyy/MM/dd";
+        NSString *dateStr = [formatter stringFromDate:match1.time];
+        formatter.dateFormat = @"yyyy/MM/dd";
+        match1.day = [formatter dateFromString:dateStr];
+        [match1 setTeam1:team1];
+        [match1 setTeam2:team2];
+        // add match to team
+        [team1 addMatchsObject:match1];
+        [team2 addMatchsObject:match1];
+    }
+    
     
     // save context
     [[AppViewController Shared] saveContext];
+    
+    _fetchedResultsController = nil;
+    // reload view
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -78,7 +90,18 @@
 -(void)initInterface
 {
     // setup header
-    [self.headerView loadWithTitle:@"MATCHS" withLeftButton:NO leftImage:nil leftText:nil withRightButton:NO rightImage:nil];
+    [self.headerView loadWithTitle:@"MATCHS" withLeftButton:NO leftImage:nil leftText:nil withRightButton:YES rightImage:[UIImage imageNamed:@"home_icon_fillter"]];
+    self.headerView.rightBtn.frame = CGRectMake(275, 27, 32, 32);
+    self.headerView.delegate = self;
+}
+
+#pragma mark - CommonHeaderDelegate
+-(void)commonHeaderDidSelectRightButton:(CommonHeaderView *)view
+{
+    // show filter view
+    TeamFilterViewController *filterController = [TeamFilterViewController new];
+    filterController.delegate = self;
+    [self.navigationController pushViewController:filterController animated:YES];
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
@@ -113,6 +136,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self setReminderForDate:[NSDate date]];
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -136,6 +160,11 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:WC_MATCH_MODEL inManagedObjectContext:_managedObjectContext];
     [fetchRequest setEntity:entity];
     
+    if (self.filteredTeam) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"team1 == %@ OR team2 == %@", self.filteredTeam, self.filteredTeam];
+        [fetchRequest setPredicate:predicate];
+    }
+    
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"time"  ascending:YES];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     
@@ -149,5 +178,68 @@
     }
     
     return _fetchedResultsController;
+}
+
+#pragma mark - TeamFilterDelegate
+-(void)teamFilter:(TeamFilterViewController *)controller didSelect:(TeamModel *)item
+{
+    [controller.navigationController popViewControllerAnimated:YES];
+    
+    self.filteredTeam = item;
+    // re-fetch datasource
+    _fetchedResultsController = nil;
+    // reload view
+    [self.tableView reloadData];
+}
+
+#pragma mark - Utilities
+- (void)scheduleNotificationForDate:(NSDate *)date
+{
+    // Here we cancel all previously scheduled notifications
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    
+    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+    
+    localNotification.fireDate = date;
+    NSLog(@"Notification will be shown on: %@",localNotification.fireDate);
+    
+    localNotification.timeZone = [NSTimeZone defaultTimeZone];
+    localNotification.alertBody = [NSString stringWithFormat:@"Your notification message"];
+    localNotification.alertAction = NSLocalizedString(@"View details", nil);
+    
+    /* Here we set notification sound and badge on the app's icon "-1"
+     means that number indicator on the badge will be decreased by one
+     - so there will be no badge on the icon */
+    localNotification.soundName = UILocalNotificationDefaultSoundName;//@"KhucXuan.m4r";
+    localNotification.applicationIconBadgeNumber = 0;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+}
+
+-(IBAction)setReminderForDate:(NSDate*)date
+{
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond fromDate:date];
+    if (components.second + 5 > 60) {
+        components.second = 0;
+        components.minute +=1;
+    }
+    else {
+        components.second += 5;
+    }
+    
+    NSDate *myNewDate = [calendar dateFromComponents:components];
+    calendar = nil;
+    components = nil;
+    
+    [self scheduleNotificationForDate:myNewDate];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
+                                                    message:@"Alarm has been set"
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
 }
 @end

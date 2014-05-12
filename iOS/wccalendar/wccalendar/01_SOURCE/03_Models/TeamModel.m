@@ -12,9 +12,20 @@
 
 @implementation TeamModel
 
-@dynamic name;
 @dynamic imageUrl;
+@dynamic name;
 @dynamic teamID;
+@dynamic initialTitle;
 @dynamic matchs;
 
+-(NSString *)initialTitle
+{
+    if(!self.name || self.name.length == 0)
+        return @"#";
+    
+    [self willAccessValueForKey:@"initialTitle"];
+    NSString *stringToReturn = [[self.name uppercaseString] substringToIndex:1];
+    [self didAccessValueForKey:@"initialTitle"];
+    return stringToReturn;
+}
 @end

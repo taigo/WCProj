@@ -30,6 +30,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="580-gW-ljG"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="headerView" destination="ChW-Zr-sTn" id="Uo3-AC-Luk"/>
                         <outlet property="tableView" destination="jmY-GL-8RW" id="Gny-QH-W3t"/>

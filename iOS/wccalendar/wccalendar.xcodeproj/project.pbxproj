@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1823FE131921299B00E634F8 /* KhucXuan.m4r in Resources */ = {isa = PBXBuildFile; fileRef = 1823FE121921299B00E634F8 /* KhucXuan.m4r */; };
 		188CC5EE191B79CD00DC303C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188CC5ED191B79CD00DC303C /* Foundation.framework */; };
 		188CC5F0191B79CD00DC303C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188CC5EF191B79CD00DC303C /* CoreGraphics.framework */; };
 		188CC5F2191B79CD00DC303C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188CC5F1191B79CD00DC303C /* UIKit.framework */; };
@@ -20,6 +21,7 @@
 		188CC60F191B79CE00DC303C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188CC5F1191B79CD00DC303C /* UIKit.framework */; };
 		188CC617191B79CE00DC303C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 188CC615191B79CE00DC303C /* InfoPlist.strings */; };
 		188CC619191B79CE00DC303C /* wccalendarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CC618191B79CE00DC303C /* wccalendarTests.m */; };
+		189447DE1921263D00214218 /* received1.caf.m4r in Resources */ = {isa = PBXBuildFile; fileRef = 189447DD1921263D00214218 /* received1.caf.m4r */; };
 		18AFAEE219207B5F0074A69D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18AFAEE119207B5F0074A69D /* CoreData.framework */; };
 		18AFAEE519207C060074A69D /* wccalendar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18AFAEE319207C060074A69D /* wccalendar.xcdatamodeld */; };
 		18AFAEEE192082350074A69D /* AppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AFAEED192082350074A69D /* AppViewController.m */; };
@@ -40,7 +42,13 @@
 		18AFAF411920A8870074A69D /* cro.png in Resources */ = {isa = PBXBuildFile; fileRef = 18AFAF3F1920A8870074A69D /* cro.png */; };
 		18AFAF451920B8DA0074A69D /* CommonHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AFAF441920B8DA0074A69D /* CommonHeaderView.m */; };
 		18AFAF481920BE910074A69D /* MatchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AFAF471920BE910074A69D /* MatchItem.m */; };
-		18AFAF4B1920BED30074A69D /* TeamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AFAF4A1920BED30074A69D /* TeamModel.m */; };
+		18AFAF4F192108E70074A69D /* TeamFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AFAF4D192108E70074A69D /* TeamFilterViewController.m */; };
+		18AFAF50192108E70074A69D /* TeamFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18AFAF4E192108E70074A69D /* TeamFilterViewController.xib */; };
+		18AFAF5319210DA00074A69D /* TeamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AFAF5219210DA00074A69D /* TeamModel.m */; };
+		18AFAF5719210FAA0074A69D /* TeamTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AFAF5619210FAA0074A69D /* TeamTableCell.m */; };
+		18AFAF591921137F0074A69D /* home_icon_fillter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18AFAF581921137F0074A69D /* home_icon_fillter@2x.png */; };
+		18AFAF5B192120D70074A69D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18AFAF5A192120D70074A69D /* AudioToolbox.framework */; };
+		18AFAF5E192123720074A69D /* We_Are_One.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 18AFAF5D192123720074A69D /* We_Are_One.mp3 */; };
 		18EC2C5F191E1EC100117123 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EC2C5E191E1EC100117123 /* ViewController.m */; };
 		18EC2C65191E203100117123 /* CommonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EC2C64191E203100117123 /* CommonTableViewCell.m */; };
 		18EC2C6E191E20E900117123 /* MatchTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EC2C6D191E20E900117123 /* MatchTableCell.m */; };
@@ -57,6 +65,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1823FE121921299B00E634F8 /* KhucXuan.m4r */ = {isa = PBXFileReference; lastKnownFileType = file; path = KhucXuan.m4r; sourceTree = "<group>"; };
 		188CC5EA191B79CD00DC303C /* wccalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wccalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		188CC5ED191B79CD00DC303C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		188CC5EF191B79CD00DC303C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -74,6 +83,7 @@
 		188CC614191B79CE00DC303C /* wccalendarTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "wccalendarTests-Info.plist"; sourceTree = "<group>"; };
 		188CC616191B79CE00DC303C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		188CC618191B79CE00DC303C /* wccalendarTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = wccalendarTests.m; sourceTree = "<group>"; };
+		189447DD1921263D00214218 /* received1.caf.m4r */ = {isa = PBXFileReference; lastKnownFileType = file; path = received1.caf.m4r; sourceTree = "<group>"; };
 		18AFAEE119207B5F0074A69D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		18AFAEE419207C060074A69D /* wccalendar.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = wccalendar.xcdatamodel; sourceTree = "<group>"; };
 		18AFAEEC192082350074A69D /* AppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppViewController.h; sourceTree = "<group>"; };
@@ -111,8 +121,17 @@
 		18AFAF441920B8DA0074A69D /* CommonHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonHeaderView.m; sourceTree = "<group>"; };
 		18AFAF461920BE910074A69D /* MatchItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchItem.h; sourceTree = "<group>"; };
 		18AFAF471920BE910074A69D /* MatchItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchItem.m; sourceTree = "<group>"; };
-		18AFAF491920BED30074A69D /* TeamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamModel.h; sourceTree = "<group>"; };
-		18AFAF4A1920BED30074A69D /* TeamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamModel.m; sourceTree = "<group>"; };
+		18AFAF4C192108E70074A69D /* TeamFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamFilterViewController.h; sourceTree = "<group>"; };
+		18AFAF4D192108E70074A69D /* TeamFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamFilterViewController.m; sourceTree = "<group>"; };
+		18AFAF4E192108E70074A69D /* TeamFilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeamFilterViewController.xib; sourceTree = "<group>"; };
+		18AFAF5119210DA00074A69D /* TeamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamModel.h; sourceTree = "<group>"; };
+		18AFAF5219210DA00074A69D /* TeamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamModel.m; sourceTree = "<group>"; };
+		18AFAF5519210FAA0074A69D /* TeamTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamTableCell.h; sourceTree = "<group>"; };
+		18AFAF5619210FAA0074A69D /* TeamTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamTableCell.m; sourceTree = "<group>"; };
+		18AFAF581921137F0074A69D /* home_icon_fillter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_icon_fillter@2x.png"; sourceTree = "<group>"; };
+		18AFAF5A192120D70074A69D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		18AFAF5D192123720074A69D /* We_Are_One.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = We_Are_One.mp3; sourceTree = "<group>"; };
+		18AFAF5F192125740074A69D /* wccalendar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = wccalendar.entitlements; sourceTree = "<group>"; };
 		18EC2C5D191E1EC100117123 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		18EC2C5E191E1EC100117123 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		18EC2C63191E203100117123 /* CommonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonTableViewCell.h; sourceTree = "<group>"; };
@@ -126,6 +145,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18AFAF5B192120D70074A69D /* AudioToolbox.framework in Frameworks */,
 				18AFAF15192084040074A69D /* CFNetwork.framework in Frameworks */,
 				18AFAEE219207B5F0074A69D /* CoreData.framework in Frameworks */,
 				188CC5F0191B79CD00DC303C /* CoreGraphics.framework in Frameworks */,
@@ -169,6 +189,7 @@
 		188CC5EC191B79CD00DC303C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				18AFAF5A192120D70074A69D /* AudioToolbox.framework */,
 				18AFAF14192084040074A69D /* CFNetwork.framework */,
 				18AFAEE119207B5F0074A69D /* CoreData.framework */,
 				188CC5ED191B79CD00DC303C /* Foundation.framework */,
@@ -182,6 +203,7 @@
 		188CC5F3191B79CD00DC303C /* wccalendar */ = {
 			isa = PBXGroup;
 			children = (
+				18AFAF5F192125740074A69D /* wccalendar.entitlements */,
 				18EC2C54191E1E5100117123 /* 01_SOURCE */,
 				18EC2C59191E1E5100117123 /* 02_LIBS */,
 				18EC2C5A191E1E5100117123 /* 03_RESOURCES */,
@@ -274,6 +296,25 @@
 			path = CommonHeader;
 			sourceTree = "<group>";
 		};
+		18AFAF5419210F910074A69D /* TeamTable */ = {
+			isa = PBXGroup;
+			children = (
+				18AFAF5519210FAA0074A69D /* TeamTableCell.h */,
+				18AFAF5619210FAA0074A69D /* TeamTableCell.m */,
+			);
+			path = TeamTable;
+			sourceTree = "<group>";
+		};
+		18AFAF5C192123720074A69D /* sounds */ = {
+			isa = PBXGroup;
+			children = (
+				1823FE121921299B00E634F8 /* KhucXuan.m4r */,
+				189447DD1921263D00214218 /* received1.caf.m4r */,
+				18AFAF5D192123720074A69D /* We_Are_One.mp3 */,
+			);
+			path = sounds;
+			sourceTree = "<group>";
+		};
 		18EC2C54191E1E5100117123 /* 01_SOURCE */ = {
 			isa = PBXGroup;
 			children = (
@@ -299,9 +340,9 @@
 			children = (
 				18AFAF461920BE910074A69D /* MatchItem.h */,
 				18AFAF471920BE910074A69D /* MatchItem.m */,
-				18AFAF491920BED30074A69D /* TeamModel.h */,
-				18AFAF4A1920BED30074A69D /* TeamModel.m */,
 				18AFAEE319207C060074A69D /* wccalendar.xcdatamodeld */,
+				18AFAF5119210DA00074A69D /* TeamModel.h */,
+				18AFAF5219210DA00074A69D /* TeamModel.m */,
 			);
 			path = 03_Models;
 			sourceTree = "<group>";
@@ -330,6 +371,8 @@
 		18EC2C5A191E1E5100117123 /* 03_RESOURCES */ = {
 			isa = PBXGroup;
 			children = (
+				18AFAF5C192123720074A69D /* sounds */,
+				18AFAF581921137F0074A69D /* home_icon_fillter@2x.png */,
 				18AFAF3D1920A8870074A69D /* team_flags */,
 			);
 			path = 03_RESOURCES;
@@ -351,6 +394,9 @@
 			children = (
 				18EC2C5D191E1EC100117123 /* ViewController.h */,
 				18EC2C5E191E1EC100117123 /* ViewController.m */,
+				18AFAF4C192108E70074A69D /* TeamFilterViewController.h */,
+				18AFAF4D192108E70074A69D /* TeamFilterViewController.m */,
+				18AFAF4E192108E70074A69D /* TeamFilterViewController.xib */,
 			);
 			path = 01_Main;
 			sourceTree = "<group>";
@@ -367,6 +413,7 @@
 		18EC2C62191E203100117123 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				18AFAF5419210F910074A69D /* TeamTable */,
 				18EC2C66191E20B100117123 /* MatchTable */,
 				18EC2C63191E203100117123 /* CommonTableViewCell.h */,
 				18EC2C64191E203100117123 /* CommonTableViewCell.m */,
@@ -438,6 +485,16 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Tai Truong";
 				TargetAttributes = {
+					188CC5E9191B79CD00DC303C = {
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+							com.apple.InterAppAudio = {
+								enabled = 1;
+							};
+						};
+					};
 					188CC60A191B79CE00DC303C = {
 						TestTargetID = 188CC5E9191B79CD00DC303C;
 					};
@@ -467,11 +524,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				189447DE1921263D00214218 /* received1.caf.m4r in Resources */,
 				188CC606191B79CE00DC303C /* Images.xcassets in Resources */,
+				18AFAF591921137F0074A69D /* home_icon_fillter@2x.png in Resources */,
 				18AFAF411920A8870074A69D /* cro.png in Resources */,
 				188CC5F8191B79CD00DC303C /* InfoPlist.strings in Resources */,
+				18AFAF5E192123720074A69D /* We_Are_One.mp3 in Resources */,
+				18AFAF50192108E70074A69D /* TeamFilterViewController.xib in Resources */,
 				188CC601191B79CE00DC303C /* Main.storyboard in Resources */,
 				18AFAF401920A8870074A69D /* bra.png in Resources */,
+				1823FE131921299B00E634F8 /* KhucXuan.m4r in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,6 +556,7 @@
 				18AFAEEE192082350074A69D /* AppViewController.m in Sources */,
 				18AFAF481920BE910074A69D /* MatchItem.m in Sources */,
 				18AFAF35192086940074A69D /* AFURLSessionManager.m in Sources */,
+				18AFAF4F192108E70074A69D /* TeamFilterViewController.m in Sources */,
 				18EC2C65191E203100117123 /* CommonTableViewCell.m in Sources */,
 				18AFAF32192086940074A69D /* AFURLConnectionOperation.m in Sources */,
 				18AFAF2E192086940074A69D /* AFHTTPRequestOperationManager.m in Sources */,
@@ -504,13 +567,14 @@
 				18AFAF31192086940074A69D /* AFSecurityPolicy.m in Sources */,
 				188CC5FE191B79CE00DC303C /* AppDelegate.m in Sources */,
 				18AFAF33192086940074A69D /* AFURLRequestSerialization.m in Sources */,
+				18AFAF5319210DA00074A69D /* TeamModel.m in Sources */,
 				18AFAEE519207C060074A69D /* wccalendar.xcdatamodeld in Sources */,
+				18AFAF5719210FAA0074A69D /* TeamTableCell.m in Sources */,
 				18AFAF39192087B90074A69D /* MBProgressHUD.m in Sources */,
 				18AFAF34192086940074A69D /* AFURLResponseSerialization.m in Sources */,
 				18EC2C6E191E20E900117123 /* MatchTableCell.m in Sources */,
 				18AFAF2F192086940074A69D /* AFHTTPSessionManager.m in Sources */,
 				188CC5FA191B79CE00DC303C /* main.m in Sources */,
-				18AFAF4B1920BED30074A69D /* TeamModel.m in Sources */,
 				18AFAEF51920827F0074A69D /* SupportFunction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -636,12 +700,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = wccalendar/wccalendar.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kenneth Lipscomb (EGDHMM643Z)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "wccalendar/wccalendar-Prefix.pch";
 				INFOPLIST_FILE = "wccalendar/wccalendar-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8B5373C0-02FF-48A1-8BAC-2E615F6190AB";
+				PROVISIONING_PROFILE = "D0F1D51E-0B9E-4DC7-BB3C-6283A6ABAB4D";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -651,10 +717,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = wccalendar/wccalendar.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "wccalendar/wccalendar-Prefix.pch";
 				INFOPLIST_FILE = "wccalendar/wccalendar-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "D0F1D51E-0B9E-4DC7-BB3C-6283A6ABAB4D";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

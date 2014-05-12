@@ -10,12 +10,13 @@
     </entity>
     <entity name="TeamModel" representedClassName="TeamModel" syncable="YES">
         <attribute name="imageUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="initialTitle" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="teamID" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="matchs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MatchItem" syncable="YES"/>
     </entity>
     <elements>
         <element name="MatchItem" positionX="-234" positionY="-79" width="128" height="133"/>
-        <element name="TeamModel" positionX="160" positionY="-81" width="128" height="103"/>
+        <element name="TeamModel" positionX="160" positionY="-81" width="128" height="118"/>
     </elements>
 </model>
