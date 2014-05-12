@@ -14,11 +14,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:[AppViewController Shared]];
+    UIStoryboard *homeStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ViewController *controller = [homeStoryboard instantiateViewControllerWithIdentifier:StoryboardIDMainVC];
+    AppViewController *navController = [[AppViewController alloc] initWithRootViewController:controller];
 //    navController.view.backgroundColor = [UIColor blackColor];
 //    navController.navigationBar.backgroundColor = [UIColor blackColor];
-    [navController setNavigationBarHidden:YES];
-    navController.delegate = [AppViewController Shared];
+//    [navController setNavigationBarHidden:YES];
     
     // Override point for customization after application launch.
     self.window.rootViewController = navController;
@@ -29,9 +30,6 @@
         TTLog(@"Reset local database");
         [[AppViewController Shared] resetContent:kSqliteFileName];
     }
-    
-    // change to main screen
-    [[AppViewController Shared] changeToMainScreen];
     
     return YES;
 }

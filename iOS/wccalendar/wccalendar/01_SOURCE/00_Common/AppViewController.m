@@ -235,14 +235,4 @@ static AppViewController *_appVCInstance;
     return result;
 }
 
-
-#pragma mark - Home screen
--(void)changeToMainScreen
-{
-    UIStoryboard *homeStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ViewController *controller = [homeStoryboard instantiateViewControllerWithIdentifier:StoryboardIDMainVC];
-    [_listOfViewController addObject:controller];
-    [self.navigationController pushViewController:controller animated:NO];
-}
-
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "MatchItem.h"
+#import "TeamModel.h"
 
 
 @implementation MatchItem

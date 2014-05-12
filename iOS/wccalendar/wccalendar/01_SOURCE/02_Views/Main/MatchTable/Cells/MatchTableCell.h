@@ -7,6 +7,8 @@
 //
 
 #import "CommonTableViewCell.h"
+#import "MatchItem.h"
+#import "TeamModel.h"
 
 @interface MatchTableCell : CommonTableViewCell
 @property (strong, nonatomic) UILabel *dateLbl;

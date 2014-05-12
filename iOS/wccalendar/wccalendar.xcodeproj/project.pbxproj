@@ -22,7 +22,6 @@
 		188CC619191B79CE00DC303C /* wccalendarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CC618191B79CE00DC303C /* wccalendarTests.m */; };
 		18AFAEE219207B5F0074A69D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18AFAEE119207B5F0074A69D /* CoreData.framework */; };
 		18AFAEE519207C060074A69D /* wccalendar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18AFAEE319207C060074A69D /* wccalendar.xcdatamodeld */; };
-		18AFAEE819207FC70074A69D /* MatchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AFAEE719207FC70074A69D /* MatchItem.m */; };
 		18AFAEEB19207FC80074A69D /* TeamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AFAEEA19207FC80074A69D /* TeamModel.m */; };
 		18AFAEEE192082350074A69D /* AppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AFAEED192082350074A69D /* AppViewController.m */; };
 		18AFAEF51920827F0074A69D /* SupportFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AFAEF31920827F0074A69D /* SupportFunction.m */; };
@@ -38,6 +37,9 @@
 		18AFAF34192086940074A69D /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AFAF2A192086940074A69D /* AFURLResponseSerialization.m */; };
 		18AFAF35192086940074A69D /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AFAF2C192086940074A69D /* AFURLSessionManager.m */; };
 		18AFAF39192087B90074A69D /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AFAF38192087B90074A69D /* MBProgressHUD.m */; };
+		18AFAF3C1920A6270074A69D /* MatchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AFAF3B1920A6270074A69D /* MatchItem.m */; };
+		18AFAF401920A8870074A69D /* bra.png in Resources */ = {isa = PBXBuildFile; fileRef = 18AFAF3E1920A8870074A69D /* bra.png */; };
+		18AFAF411920A8870074A69D /* cro.png in Resources */ = {isa = PBXBuildFile; fileRef = 18AFAF3F1920A8870074A69D /* cro.png */; };
 		18EC2C5F191E1EC100117123 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EC2C5E191E1EC100117123 /* ViewController.m */; };
 		18EC2C65191E203100117123 /* CommonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EC2C64191E203100117123 /* CommonTableViewCell.m */; };
 		18EC2C6E191E20E900117123 /* MatchTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EC2C6D191E20E900117123 /* MatchTableCell.m */; };
@@ -73,8 +75,6 @@
 		188CC618191B79CE00DC303C /* wccalendarTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = wccalendarTests.m; sourceTree = "<group>"; };
 		18AFAEE119207B5F0074A69D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		18AFAEE419207C060074A69D /* wccalendar.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = wccalendar.xcdatamodel; sourceTree = "<group>"; };
-		18AFAEE619207FC70074A69D /* MatchItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchItem.h; sourceTree = "<group>"; };
-		18AFAEE719207FC70074A69D /* MatchItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchItem.m; sourceTree = "<group>"; };
 		18AFAEE919207FC80074A69D /* TeamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamModel.h; sourceTree = "<group>"; };
 		18AFAEEA19207FC80074A69D /* TeamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamModel.m; sourceTree = "<group>"; };
 		18AFAEEC192082350074A69D /* AppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppViewController.h; sourceTree = "<group>"; };
@@ -106,6 +106,10 @@
 		18AFAF2C192086940074A69D /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		18AFAF37192087B90074A69D /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		18AFAF38192087B90074A69D /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		18AFAF3A1920A6270074A69D /* MatchItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchItem.h; sourceTree = "<group>"; };
+		18AFAF3B1920A6270074A69D /* MatchItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchItem.m; sourceTree = "<group>"; };
+		18AFAF3E1920A8870074A69D /* bra.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bra.png; sourceTree = "<group>"; };
+		18AFAF3F1920A8870074A69D /* cro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cro.png; sourceTree = "<group>"; };
 		18EC2C5D191E1EC100117123 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		18EC2C5E191E1EC100117123 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		18EC2C63191E203100117123 /* CommonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonTableViewCell.h; sourceTree = "<group>"; };
@@ -249,6 +253,15 @@
 			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
+		18AFAF3D1920A8870074A69D /* team_flags */ = {
+			isa = PBXGroup;
+			children = (
+				18AFAF3E1920A8870074A69D /* bra.png */,
+				18AFAF3F1920A8870074A69D /* cro.png */,
+			);
+			path = team_flags;
+			sourceTree = "<group>";
+		};
 		18EC2C54191E1E5100117123 /* 01_SOURCE */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,10 +286,10 @@
 			isa = PBXGroup;
 			children = (
 				18AFAEE319207C060074A69D /* wccalendar.xcdatamodeld */,
+				18AFAF3A1920A6270074A69D /* MatchItem.h */,
+				18AFAF3B1920A6270074A69D /* MatchItem.m */,
 				18AFAEE919207FC80074A69D /* TeamModel.h */,
 				18AFAEEA19207FC80074A69D /* TeamModel.m */,
-				18AFAEE619207FC70074A69D /* MatchItem.h */,
-				18AFAEE719207FC70074A69D /* MatchItem.m */,
 			);
 			path = 03_Models;
 			sourceTree = "<group>";
@@ -305,6 +318,7 @@
 		18EC2C5A191E1E5100117123 /* 03_RESOURCES */ = {
 			isa = PBXGroup;
 			children = (
+				18AFAF3D1920A8870074A69D /* team_flags */,
 			);
 			path = 03_RESOURCES;
 			sourceTree = "<group>";
@@ -441,8 +455,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				188CC606191B79CE00DC303C /* Images.xcassets in Resources */,
+				18AFAF411920A8870074A69D /* cro.png in Resources */,
 				188CC5F8191B79CD00DC303C /* InfoPlist.strings in Resources */,
 				188CC601191B79CE00DC303C /* Main.storyboard in Resources */,
+				18AFAF401920A8870074A69D /* bra.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,7 +483,6 @@
 				18EC2C65191E203100117123 /* CommonTableViewCell.m in Sources */,
 				18AFAF32192086940074A69D /* AFURLConnectionOperation.m in Sources */,
 				18AFAF2E192086940074A69D /* AFHTTPRequestOperationManager.m in Sources */,
-				18AFAEE819207FC70074A69D /* MatchItem.m in Sources */,
 				18AFAF30192086940074A69D /* AFNetworkReachabilityManager.m in Sources */,
 				18AFAF18192086830074A69D /* WebserviceManager.m in Sources */,
 				18EC2C5F191E1EC100117123 /* ViewController.m in Sources */,
@@ -479,6 +494,7 @@
 				18AFAF34192086940074A69D /* AFURLResponseSerialization.m in Sources */,
 				18EC2C6E191E20E900117123 /* MatchTableCell.m in Sources */,
 				18AFAEEB19207FC80074A69D /* TeamModel.m in Sources */,
+				18AFAF3C1920A6270074A69D /* MatchItem.m in Sources */,
 				18AFAF2F192086940074A69D /* AFHTTPSessionManager.m in Sources */,
 				188CC5FA191B79CE00DC303C /* main.m in Sources */,
 				18AFAEF51920827F0074A69D /* SupportFunction.m in Sources */,

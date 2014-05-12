@@ -11,6 +11,8 @@
 
 #define WC_MATCH_MODEL @"MatchItem"
 
+@class TeamModel;
+
 @interface MatchItem : NSManagedObject
 
 @property (nonatomic, retain) NSString * score;
@@ -22,8 +24,8 @@
 
 @interface MatchItem (CoreDataGeneratedAccessors)
 
-- (void)addTeamsObject:(NSManagedObject *)value;
-- (void)removeTeamsObject:(NSManagedObject *)value;
+- (void)addTeamsObject:(TeamModel *)value;
+- (void)removeTeamsObject:(TeamModel *)value;
 - (void)addTeams:(NSSet *)values;
 - (void)removeTeams:(NSSet *)values;
 

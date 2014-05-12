@@ -11,7 +11,7 @@
 #import "CoreData/CoreData.h"
 #import "ViewController.h"
 
-@interface AppViewController : UIViewController <UINavigationControllerDelegate> {
+@interface AppViewController : UINavigationController <UINavigationControllerDelegate> {
     NSMutableArray                                  *_listOfViewController;
     UIView                                          *_requestingView;
     UIActivityIndicatorView                         *_requestingIndicator;
@@ -35,7 +35,5 @@
 -(void)requestUpdateDeviceToken:(NSString*)oldToken;
 
 // navigation methods
-#pragma mark - Home Screen
--(void)changeToMainScreen;
 
 @end
