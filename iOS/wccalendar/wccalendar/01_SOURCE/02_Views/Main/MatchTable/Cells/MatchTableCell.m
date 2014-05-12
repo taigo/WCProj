@@ -48,7 +48,7 @@
         _timeLbl.textAlignment = NSTextAlignmentRight;
         [self addSubview:_team2_NameLbl];
         // team2's image
-        _team2_ImgView = [[UIImageView alloc] initWithFrame:CGRectMake(277, 18, 35, 23)];
+        _team2_ImgView = [[UIImageView alloc] initWithFrame:CGRectMake(274, 18, 35, 23)];
         [self addSubview:_team2_ImgView];
         
         // separator
@@ -93,12 +93,12 @@
     }
     
     // team 1
-    TeamModel *team = item.teams.allObjects[0];
+    TeamModel *team = item.team1;
     self.team1_ImgView.image = [UIImage imageNamed:team.imageUrl];
     self.team1_NameLbl.text = team.name;
     
     // team 2
-    team = item.teams.allObjects[1];
+    team = item.team2;
     self.team2_ImgView.image = [UIImage imageNamed:team.imageUrl];
     self.team2_NameLbl.text = team.name;
     

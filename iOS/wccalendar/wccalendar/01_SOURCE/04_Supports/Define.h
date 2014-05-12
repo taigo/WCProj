@@ -59,4 +59,7 @@
 #define StoryboardIDMainVC  @"ViewController"
 
 // CoreData
-#define kSqliteFileName @"wccalendar"
+#define kSqliteFileName     @"wccalendar"
+#define WC_TEAM_MODEL       @"TeamModel"
+#define WC_MATCH_MODEL      @"MatchItem"
+

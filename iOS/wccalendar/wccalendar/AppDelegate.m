@@ -19,7 +19,7 @@
     AppViewController *navController = [[AppViewController alloc] initWithRootViewController:controller];
 //    navController.view.backgroundColor = [UIColor blackColor];
 //    navController.navigationBar.backgroundColor = [UIColor blackColor];
-//    [navController setNavigationBarHidden:YES];
+    [navController setNavigationBarHidden:YES];
     
     // Override point for customization after application launch.
     self.window.rootViewController = navController;

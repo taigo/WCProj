@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-#define WC_TEAM_MODEL @"TeamModel"
-
 @class MatchItem;
 
 @interface TeamModel : NSManagedObject

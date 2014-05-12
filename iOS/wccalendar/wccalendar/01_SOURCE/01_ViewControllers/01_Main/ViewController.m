@@ -9,8 +9,10 @@
 #import "ViewController.h"
 #import "AppViewController.h"
 #import "MatchTableCell.h"
+#import "CommonHeaderView.h"
 
 @interface ViewController () <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
+@property (weak, nonatomic) IBOutlet CommonHeaderView *headerView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @end
@@ -31,7 +33,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.title = @"MATCHS";
+    // set table inset
+    [self.tableView setContentInset:UIEdgeInsetsZero];
 }
 
 -(void)addSampleData
@@ -55,8 +58,11 @@
     NSString *dateStr = [formatter stringFromDate:match1.time];
     formatter.dateFormat = @"yyyy/MM/dd";
     match1.day = [formatter dateFromString:dateStr];
-    [match1 addTeamsObject:team1];
-    [match1 addTeamsObject:team2];
+    [match1 setTeam1:team1];
+    [match1 setTeam2:team2];
+    // add match to team
+    [team1 addMatchsObject:match1];
+    [team2 addMatchsObject:match1];
     
     // save context
     [[AppViewController Shared] saveContext];
@@ -71,6 +77,8 @@
 #pragma mark - Interface
 -(void)initInterface
 {
+    // setup header
+    [self.headerView loadWithTitle:@"MATCHS" withLeftButton:NO leftImage:nil leftText:nil withRightButton:NO rightImage:nil];
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
@@ -102,6 +110,19 @@
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    MatchItem *item = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"EEEE dd MMMM";
+    return [[formatter stringFromDate:item.day] capitalizedString];
+}
+
 #pragma mark - Database methods
 -(NSFetchedResultsController *)fetchedResultsController
 {
@@ -115,7 +136,7 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:WC_MATCH_MODEL inManagedObjectContext:_managedObjectContext];
     [fetchRequest setEntity:entity];
     
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"time"  ascending:NO];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"time"  ascending:YES];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     
     _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:_managedObjectContext sectionNameKeyPath:@"day" cacheName:nil];

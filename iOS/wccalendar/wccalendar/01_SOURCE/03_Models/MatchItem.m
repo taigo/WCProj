@@ -16,6 +16,7 @@
 @dynamic time;
 @dynamic day;
 @dynamic matchID;
-@dynamic teams;
+@dynamic team1;
+@dynamic team2;
 
 @end

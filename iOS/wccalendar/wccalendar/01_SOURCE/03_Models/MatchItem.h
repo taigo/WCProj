@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-#define WC_MATCH_MODEL @"MatchItem"
-
 @class TeamModel;
 
 @interface MatchItem : NSManagedObject
@@ -19,14 +17,7 @@
 @property (nonatomic, retain) NSDate * time;
 @property (nonatomic, retain) NSDate * day;
 @property (nonatomic, retain) NSString * matchID;
-@property (nonatomic, retain) NSSet *teams;
-@end
-
-@interface MatchItem (CoreDataGeneratedAccessors)
-
-- (void)addTeamsObject:(TeamModel *)value;
-- (void)removeTeamsObject:(TeamModel *)value;
-- (void)addTeams:(NSSet *)values;
-- (void)removeTeams:(NSSet *)values;
+@property (nonatomic, retain) TeamModel *team1;
+@property (nonatomic, retain) TeamModel *team2;
 
 @end
