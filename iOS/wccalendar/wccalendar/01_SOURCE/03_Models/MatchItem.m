@@ -2,12 +2,19 @@
 //  MatchItem.m
 //  wccalendar
 //
-//  Created by Tai Truong on 5/10/14.
+//  Created by Tai Truong on 5/12/14.
 //  Copyright (c) 2014 Tai Truong. All rights reserved.
 //
 
 #import "MatchItem.h"
 
+
 @implementation MatchItem
+
+@dynamic score;
+@dynamic time;
+@dynamic day;
+@dynamic matchID;
+@dynamic teams;
 
 @end

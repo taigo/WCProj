@@ -13,4 +13,12 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+    #import "Define.h"
+    #import "WebserviceManager.h"
+    #import "MBProgressHUD.h"
 #endif
+
+#define SharedAppDelegate ((AppDelegate*)[[UIApplication sharedApplication] delegate])
+
+#define _AFNETWORKING_PIN_SSL_CERTIFICATES_
+#define _AFNETWORKING_ALLOW_INVALID_SSL_CERTIFICATES_ 1

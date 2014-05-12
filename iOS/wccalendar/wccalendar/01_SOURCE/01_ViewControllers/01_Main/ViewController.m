@@ -7,10 +7,12 @@
 //
 
 #import "ViewController.h"
+#import "MatchItem.h"
+#import "TeamModel.h"
 
-@interface ViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface ViewController () <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @end
 
 @implementation ViewController
@@ -55,5 +57,27 @@
 //    [cell setObject:[self.datasource objectAtIndex:indexPath.row]];
 //    return cell;
     return nil;
+}
+
+#pragma mark - Database methods
+-(NSFetchedResultsController *)fetchedResultsController
+{
+    if (_fetchedResultsController) {
+        return _fetchedResultsController;
+    }
+    
+//    NSManagedObjectContext * _managedObjectContext = [AppViewController Shared].managedObjectContext;
+//    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+//    fetchRequest.includesSubentities = NO;
+//    NSEntityDescription *entity = [NSEntityDescription entityForName:VKHOMEACTIVITY_MODEL inManagedObjectContext:_managedObjectContext];
+//    [fetchRequest setEntity:entity];
+//    
+//    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"datecreated"  ascending:NO];
+//    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+//    
+//    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:_managedObjectContext sectionNameKeyPath:@"dayCreated" cacheName:nil];
+    _fetchedResultsController.delegate = self;
+    
+    return _fetchedResultsController;
 }
 @end

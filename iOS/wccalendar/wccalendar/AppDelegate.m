@@ -7,12 +7,32 @@
 //
 
 #import "AppDelegate.h"
+#import "AppViewController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:[AppViewController Shared]];
+//    navController.view.backgroundColor = [UIColor blackColor];
+//    navController.navigationBar.backgroundColor = [UIColor blackColor];
+    [navController setNavigationBarHidden:YES];
+    navController.delegate = [AppViewController Shared];
+    
+    // Override point for customization after application launch.
+    self.window.rootViewController = navController;
+    [self.window makeKeyAndVisible];
+    
+    // validate local database with model
+    if (![[AppViewController Shared] validateLocalDatabase]) {
+        TTLog(@"Reset local database");
+        [[AppViewController Shared] resetContent:kSqliteFileName];
+    }
+    
+    // change to main screen
+    [[AppViewController Shared] changeToMainScreen];
+    
     return YES;
 }
 							
