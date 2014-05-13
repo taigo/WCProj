@@ -63,3 +63,19 @@
 #define WC_TEAM_MODEL       @"TeamModel"
 #define WC_MATCH_MODEL      @"MatchItem"
 
+typedef enum {
+    enumAlertTime_None,
+    enumAlertTime_OnTime,   // at time of event
+    enumAlertTime_5Mins,    // 5 minutes before
+    enumAlertTime_15Mins,   // 15 minutes before
+    enumAlertTime_30Mins,   // 30 minutes before
+    enumAlertTime_1hour,    // 1 hour before
+    enumAlertTime_2hours,   // 2 hours before
+    enumAlertTime_3hours,   // 3 hours before
+    enumAlertTime_1day,     // 1 days before
+    enumAlertTime_2days,    // 2 days before
+    enumAlertTime_1week,    // 1 week before
+    enumAlertTime_Num
+}enumAlertTime;
+
+

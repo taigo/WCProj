@@ -11,8 +11,9 @@
 #import "MatchTableCell.h"
 #import "CommonHeaderView.h"
 #import "TeamFilterViewController.h"
+#import "TimeSelectorViewController.h"
 
-@interface ViewController () <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, CommonHeaderDelegate, TeamFilterDelegate>
+@interface ViewController () <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, CommonHeaderDelegate, TeamFilterDelegate, TimeSelectorDelegate>
 @property (weak, nonatomic) IBOutlet CommonHeaderView *headerView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
@@ -134,15 +135,45 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self setReminderForDate:[NSDate date]];
+    [self showAlertTimeSelectorForItem:[self.fetchedResultsController objectAtIndexPath:indexPath]];
 }
 
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+//{
+//    MatchItem *item = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    formatter.dateFormat = @"EEEE dd MMMM";
+//    return [[formatter stringFromDate:item.day] capitalizedString];
+//}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    return 25.0f;
+}
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"matchtableheader"];
+    if (!view) {
+        view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_IPHONE, 25.0f)];
+        view.backgroundColor = [SupportFunction colorFromHexString:@"efeff4"];
+        UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, 25.0f - 0.5f, WIDTH_IPHONE, 0.5f)];
+        [separator setBackgroundColor:[UIColor grayColor]];
+        [view addSubview:separator];
+        
+        // text label
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 300, 25.0f)];
+        label.font = [UIFont fontWithName:FONT_APP_BOLD size:17.0f];
+        label.tag = 1000;
+        label.backgroundColor = [UIColor clearColor];
+        [view addSubview:label];
+    }
+    
     MatchItem *item = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"EEEE dd MMMM";
-    return [[formatter stringFromDate:item.day] capitalizedString];
+    UILabel *textLbl = (id)[view viewWithTag:1000];
+    textLbl.text = [[formatter stringFromDate:item.day] capitalizedString];
+    return view;
 }
 
 #pragma mark - Database methods
@@ -190,7 +221,23 @@
     [self.tableView reloadData];
 }
 
+#pragma mark - TimeSelectorDelegate
+-(void)timeSelector:(TimeSelectorViewController *)controller didSelect:(enumAlertTime)time
+{
+    
+}
+
 #pragma mark - Utilities
+
+-(void)showAlertTimeSelectorForItem:(MatchItem*)match
+{
+    TimeSelectorViewController *controller = [TimeSelectorViewController new];
+    controller.delegate = self;
+    controller.object = match;
+    // TODO: need save alert time for match
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
 - (void)scheduleNotificationForDate:(NSDate *)date
 {
     // Here we cancel all previously scheduled notifications

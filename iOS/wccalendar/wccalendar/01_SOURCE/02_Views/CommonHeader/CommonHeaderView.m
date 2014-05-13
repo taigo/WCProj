@@ -39,12 +39,12 @@
 -(void)initInterface
 {
     self.frame = CGRectMake(0, 0, WIDTH_IPHONE, COMMON_HEADER_HEIGHT);
-    self.backgroundColor = [UIColor colorWithWhite:0.0f alpha:1.0f];
+    self.backgroundColor = [SupportFunction colorFromHexString:@"f7f7f7"];
     
     // title label
     _titleLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, CGRectGetWidth(self.bounds), 44)];
     _titleLbl.font = [UIFont fontWithName:FONT_APP_BOLD size:17.0f];
-    _titleLbl.textColor = [UIColor whiteColor];
+    _titleLbl.textColor = [UIColor blackColor];
     _titleLbl.backgroundColor = [UIColor clearColor];
     _titleLbl.textAlignment = NSTextAlignmentCenter;
     [self addSubview:_titleLbl];
@@ -53,15 +53,15 @@
     // title label
     _leftLbl = [[UILabel alloc] initWithFrame:CGRectMake(25, 20, 90, 44)];
     _leftLbl.font = [UIFont fontWithName:FONT_APP_REGULAR size:16.0f];
-    _leftLbl.textColor = [UIColor whiteColor];
+    _leftLbl.textColor = [UIColor blackColor];
     _leftLbl.backgroundColor = [UIColor clearColor];
     _leftLbl.minimumScaleFactor = 0.6f;
     _leftLbl.adjustsFontSizeToFitWidth = YES;
     [self addSubview:_leftLbl];
     
     // left button
-    _leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 20, 65, 44)];
-    [_leftBtn setImage:[UIImage imageNamed:@"back-btn.png"] forState:UIControlStateNormal];
+    _leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(8, 21, 65, 44)];
+    [_leftBtn setImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateNormal];
     _leftBtn.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     _leftBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [_leftBtn addTarget:self action:@selector(leftBtnTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
@@ -76,6 +76,7 @@
     [self addSubview:_rightBtn];
     
     _rightBtn.titleLabel.font = _leftBtn.titleLabel.font = _leftLbl.font;
+    [_rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     // separator
     UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, COMMON_HEADER_HEIGHT - 0.5f, WIDTH_IPHONE, 0.5f)];
     [separator setBackgroundColor:[UIColor grayColor]];

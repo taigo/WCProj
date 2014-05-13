@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		181EB64519221C7500CC6638 /* btn_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 181EB64419221C7500CC6638 /* btn_back.png */; };
+		181EB64B19221EA300CC6638 /* btn_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 181EB64A19221EA300CC6638 /* btn_back@2x.png */; };
 		1823FE131921299B00E634F8 /* KhucXuan.m4r in Resources */ = {isa = PBXBuildFile; fileRef = 1823FE121921299B00E634F8 /* KhucXuan.m4r */; };
+		1823FE171922067E00E634F8 /* TimeSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1823FE151922067E00E634F8 /* TimeSelectorViewController.m */; };
+		1823FE181922067E00E634F8 /* TimeSelectorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1823FE161922067E00E634F8 /* TimeSelectorViewController.xib */; };
 		188CC5EE191B79CD00DC303C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188CC5ED191B79CD00DC303C /* Foundation.framework */; };
 		188CC5F0191B79CD00DC303C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188CC5EF191B79CD00DC303C /* CoreGraphics.framework */; };
 		188CC5F2191B79CD00DC303C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188CC5F1191B79CD00DC303C /* UIKit.framework */; };
@@ -65,7 +69,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		181EB64419221C7500CC6638 /* btn_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_back.png; sourceTree = "<group>"; };
+		181EB64A19221EA300CC6638 /* btn_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_back@2x.png"; sourceTree = "<group>"; };
 		1823FE121921299B00E634F8 /* KhucXuan.m4r */ = {isa = PBXFileReference; lastKnownFileType = file; path = KhucXuan.m4r; sourceTree = "<group>"; };
+		1823FE141922067E00E634F8 /* TimeSelectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeSelectorViewController.h; sourceTree = "<group>"; };
+		1823FE151922067E00E634F8 /* TimeSelectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeSelectorViewController.m; sourceTree = "<group>"; };
+		1823FE161922067E00E634F8 /* TimeSelectorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimeSelectorViewController.xib; sourceTree = "<group>"; };
 		188CC5EA191B79CD00DC303C /* wccalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wccalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		188CC5ED191B79CD00DC303C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		188CC5EF191B79CD00DC303C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -371,6 +380,8 @@
 		18EC2C5A191E1E5100117123 /* 03_RESOURCES */ = {
 			isa = PBXGroup;
 			children = (
+				181EB64A19221EA300CC6638 /* btn_back@2x.png */,
+				181EB64419221C7500CC6638 /* btn_back.png */,
 				18AFAF5C192123720074A69D /* sounds */,
 				18AFAF581921137F0074A69D /* home_icon_fillter@2x.png */,
 				18AFAF3D1920A8870074A69D /* team_flags */,
@@ -397,6 +408,9 @@
 				18AFAF4C192108E70074A69D /* TeamFilterViewController.h */,
 				18AFAF4D192108E70074A69D /* TeamFilterViewController.m */,
 				18AFAF4E192108E70074A69D /* TeamFilterViewController.xib */,
+				1823FE141922067E00E634F8 /* TimeSelectorViewController.h */,
+				1823FE151922067E00E634F8 /* TimeSelectorViewController.m */,
+				1823FE161922067E00E634F8 /* TimeSelectorViewController.xib */,
 			);
 			path = 01_Main;
 			sourceTree = "<group>";
@@ -524,6 +538,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				181EB64B19221EA300CC6638 /* btn_back@2x.png in Resources */,
 				189447DE1921263D00214218 /* received1.caf.m4r in Resources */,
 				188CC606191B79CE00DC303C /* Images.xcassets in Resources */,
 				18AFAF591921137F0074A69D /* home_icon_fillter@2x.png in Resources */,
@@ -533,7 +548,9 @@
 				18AFAF50192108E70074A69D /* TeamFilterViewController.xib in Resources */,
 				188CC601191B79CE00DC303C /* Main.storyboard in Resources */,
 				18AFAF401920A8870074A69D /* bra.png in Resources */,
+				1823FE181922067E00E634F8 /* TimeSelectorViewController.xib in Resources */,
 				1823FE131921299B00E634F8 /* KhucXuan.m4r in Resources */,
+				181EB64519221C7500CC6638 /* btn_back.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -559,6 +576,7 @@
 				18AFAF4F192108E70074A69D /* TeamFilterViewController.m in Sources */,
 				18EC2C65191E203100117123 /* CommonTableViewCell.m in Sources */,
 				18AFAF32192086940074A69D /* AFURLConnectionOperation.m in Sources */,
+				1823FE171922067E00E634F8 /* TimeSelectorViewController.m in Sources */,
 				18AFAF2E192086940074A69D /* AFHTTPRequestOperationManager.m in Sources */,
 				18AFAF30192086940074A69D /* AFNetworkReachabilityManager.m in Sources */,
 				18AFAF18192086830074A69D /* WebserviceManager.m in Sources */,
