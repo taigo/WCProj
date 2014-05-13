@@ -37,8 +37,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    // set table inset
-    [self.tableView setContentInset:UIEdgeInsetsZero];
 }
 
 -(void)addSampleData
@@ -204,6 +202,7 @@
     NSLog(@"Notification will be shown on: %@",localNotification.fireDate);
     
     localNotification.timeZone = [NSTimeZone defaultTimeZone];
+    
     localNotification.alertBody = [NSString stringWithFormat:@"Your notification message"];
     localNotification.alertAction = NSLocalizedString(@"View details", nil);
     
