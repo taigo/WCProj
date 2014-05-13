@@ -181,6 +181,8 @@ static AppViewController *_appVCInstance;
          
          */
         TTLog(@"Unresolved error %@, %@", error, [error userInfo]);
+//        abort();
+        [self resetContent:kSqliteFileName];
         abort();
     }
     

@@ -2,7 +2,7 @@
 //  MatchItem.h
 //  wccalendar
 //
-//  Created by Tai Truong on 5/12/14.
+//  Created by Tai Truong on 5/13/14.
 //  Copyright (c) 2014 Tai Truong. All rights reserved.
 //
 
@@ -13,10 +13,11 @@
 
 @interface MatchItem : NSManagedObject
 
-@property (nonatomic, retain) NSString * score;
-@property (nonatomic, retain) NSDate * time;
 @property (nonatomic, retain) NSDate * day;
 @property (nonatomic, retain) NSString * matchID;
+@property (nonatomic, retain) NSString * score;
+@property (nonatomic, retain) NSDate * time;
+@property (nonatomic, retain) NSNumber * alertTime;
 @property (nonatomic, retain) TeamModel *team1;
 @property (nonatomic, retain) TeamModel *team2;
 

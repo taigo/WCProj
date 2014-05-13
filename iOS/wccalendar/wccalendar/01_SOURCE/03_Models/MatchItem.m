@@ -2,7 +2,7 @@
 //  MatchItem.m
 //  wccalendar
 //
-//  Created by Tai Truong on 5/12/14.
+//  Created by Tai Truong on 5/13/14.
 //  Copyright (c) 2014 Tai Truong. All rights reserved.
 //
 
@@ -12,10 +12,11 @@
 
 @implementation MatchItem
 
-@dynamic score;
-@dynamic time;
 @dynamic day;
 @dynamic matchID;
+@dynamic score;
+@dynamic time;
+@dynamic alertTime;
 @dynamic team1;
 @dynamic team2;
 

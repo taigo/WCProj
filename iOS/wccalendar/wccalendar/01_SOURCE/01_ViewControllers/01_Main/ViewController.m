@@ -56,6 +56,7 @@
     for (NSInteger i = 0; i < 5; i++) {
         // add match
         MatchItem *match1 = [NSEntityDescription insertNewObjectForEntityForName:WC_MATCH_MODEL inManagedObjectContext:managedObjectContext];
+        match1.matchID = [NSString stringWithFormat:@"%d", i];
         match1.time = [NSDate date];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         TTLog(@"%@", match1.time);
@@ -138,14 +139,6 @@
     [self showAlertTimeSelectorForItem:[self.fetchedResultsController objectAtIndexPath:indexPath]];
 }
 
-//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-//{
-//    MatchItem *item = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
-//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//    formatter.dateFormat = @"EEEE dd MMMM";
-//    return [[formatter stringFromDate:item.day] capitalizedString];
-//}
-
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 25.0f;
@@ -224,7 +217,14 @@
 #pragma mark - TimeSelectorDelegate
 -(void)timeSelector:(TimeSelectorViewController *)controller didSelect:(enumAlertTime)time
 {
-    
+    [self.navigationController popViewControllerAnimated:YES];
+    MatchItem *match = controller.object;
+    // only reset alert time if the new one is different
+    if ([match.alertTime integerValue] != time) {
+        match.alertTime = @(time);
+        [self scheduleNotificationForMatch:match];
+        [[AppViewController Shared] saveContext];
+    }
 }
 
 #pragma mark - Utilities
@@ -234,58 +234,141 @@
     TimeSelectorViewController *controller = [TimeSelectorViewController new];
     controller.delegate = self;
     controller.object = match;
-    // TODO: need save alert time for match
+    controller.selectedTime = [match.alertTime integerValue];
     [self.navigationController pushViewController:controller animated:YES];
 }
 
-- (void)scheduleNotificationForDate:(NSDate *)date
+- (void)scheduleNotificationForMatch:(MatchItem *)match
 {
-    // Here we cancel all previously scheduled notifications
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    NSArray *notifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
+    // cancel current notification if any
+    for (UILocalNotification *notificaiton in notifications)
+    {
+        NSDictionary *dic = notificaiton.userInfo;
+        if ([[dic valueForKey:@"matchID"] isEqualToString:match.matchID]) {
+            TTLog(@"CANCEL a notification");
+            [[UIApplication sharedApplication] cancelLocalNotification:notificaiton];
+        }
+    }
+    if ([match.alertTime integerValue] == enumAlertTime_None) {
+        return;
+    }
     
+    // create new notification
     UILocalNotification *localNotification = [[UILocalNotification alloc] init];
     
-    localNotification.fireDate = date;
+    // set time
+    NSDate *fireDate = [self alertDateForMath:match];
+
+//    // TODO: for testing
+//    NSDate *date = [NSDate date];
+//    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+//    NSDateComponents *components = [[NSDateComponents alloc] init];
+//    components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond fromDate:date];
+//    if (components.second + 10 > 60) {
+//        components.second = 0;
+//        components.minute +=1;
+//    }
+//    else {
+//        components.second += 10;
+//    }
+//    NSDate *myNewDate = [calendar dateFromComponents:components];
+//    calendar = nil;
+//    components = nil;
+//    
+//    // TODO: set time for testing notification
+    localNotification.fireDate = fireDate;
     NSLog(@"Notification will be shown on: %@",localNotification.fireDate);
-    
     localNotification.timeZone = [NSTimeZone defaultTimeZone];
     
-    localNotification.alertBody = [NSString stringWithFormat:@"Your notification message"];
+    // set message
+    localNotification.alertBody = [NSString stringWithFormat:@"Match %@ - %@ will begin %@.", match.team1.name, match.team2.name, [self stringFromAlertTime:match.alertTime]];
     localNotification.alertAction = NSLocalizedString(@"View details", nil);
     
-    /* Here we set notification sound and badge on the app's icon "-1"
-     means that number indicator on the badge will be decreased by one
-     - so there will be no badge on the icon */
-    localNotification.soundName = UILocalNotificationDefaultSoundName;//@"KhucXuan.m4r";
+    // set user info
+    NSDictionary *infoDict = [NSDictionary dictionaryWithObject:match.matchID forKey:@"matchID"];
+    localNotification.userInfo = infoDict;
+    
+    // set sound
+    localNotification.soundName = @"We_Are_One.mp3";
     localNotification.applicationIconBadgeNumber = 0;
     
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 }
 
--(IBAction)setReminderForDate:(NSDate*)date
+-(NSString*)stringFromAlertTime:(NSNumber*)time
 {
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *components = [[NSDateComponents alloc] init];
-    components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond fromDate:date];
-    if (components.second + 5 > 60) {
-        components.second = 0;
-        components.minute +=1;
+    switch (time.integerValue) {
+        case enumAlertTime_OnTime:
+            return @"now";
+        case enumAlertTime_5Mins:
+            return @"in 5 minutes";
+        case enumAlertTime_15Mins:
+            return @"in 15 minutes";
+        case enumAlertTime_30Mins:
+            return @"in 30 minutes";
+        case enumAlertTime_1hour:
+            return @"in 1 hour";
+        case enumAlertTime_2hours:
+            return @"in 2 hours";
+        case enumAlertTime_3hours:
+            return @"in 3 hours";
+        case enumAlertTime_1day:
+            return @"in 1 day";
+        case enumAlertTime_2days:
+            return @"in 2 days";
+        case enumAlertTime_1week:
+            return @"in 1 week";
+            
+        default:
+            break;
     }
-    else {
-        components.second += 5;
-    }
-    
-    NSDate *myNewDate = [calendar dateFromComponents:components];
-    calendar = nil;
-    components = nil;
-    
-    [self scheduleNotificationForDate:myNewDate];
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
-                                                    message:@"Alarm has been set"
-                                                   delegate:self
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
+    return @"";
 }
+
+-(NSDate*)alertDateForMath:(MatchItem*)match
+{
+    NSDate *date = nil;
+    switch (match.alertTime.integerValue) {
+        case enumAlertTime_OnTime:
+            date = match.time;
+            break;
+        case enumAlertTime_5Mins:
+            date = [match.time dateByAddingTimeInterval:(-5*60)];
+            break;
+        case enumAlertTime_15Mins:
+            date = [match.time dateByAddingTimeInterval:(-15*60)];
+            break;
+        case enumAlertTime_30Mins:
+            date = [match.time dateByAddingTimeInterval:(-30*60)];
+            break;
+        case enumAlertTime_1hour:
+            date = [match.time dateByAddingTimeInterval:(-60*60)];
+            break;
+        case enumAlertTime_2hours:
+            date = [match.time dateByAddingTimeInterval:(-2*60*60)];
+            break;
+        case enumAlertTime_3hours:
+            date = [match.time dateByAddingTimeInterval:(-3*60*60)];
+            break;
+        case enumAlertTime_1day:
+            date = [match.time dateByAddingTimeInterval:(-24*60*60)];
+            break;
+        case enumAlertTime_2days:
+            date = [match.time dateByAddingTimeInterval:(-2*24*60*60)];
+            break;
+        case enumAlertTime_1week:
+            date = [match.time dateByAddingTimeInterval:(-7*24*60*60)];
+            break;
+            
+        default:
+            break;
+    }
+    
+    TTLog(@"old = %@", match.time);
+    TTLog(@"new = %@", date);
+    
+    return date;
+}
+
 @end
