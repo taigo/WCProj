@@ -10,11 +10,14 @@
 #import "AFHTTPRequestOperationManager.h"
 
 #ifndef STRING_REQUEST_ROOT
-#define STRING_REQUEST_ROOT                                      @"http://ttreader.herokuapp.com/ttreader"
+#define STRING_REQUEST_ROOT                                      @"http://ttreader.herokuapp.com/ttwc"
 #endif
+
+#define STRING_REQUEST_GET_MATCHS_INFO                           @"/matchs"
 
 typedef enum {
     ENUM_API_REQUEST_INVALID = 0,
+    ENUM_API_REQUEST_GET_MATCHS_INFO,
     ENUM_API_REQUEST_NUM
 }ENUM_API_REQUEST_TYPE;
 

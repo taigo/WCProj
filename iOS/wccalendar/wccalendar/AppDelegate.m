@@ -31,7 +31,7 @@
         TTLog(@"Reset local database");
         [[AppViewController Shared] resetContent:kSqliteFileName];
     }
-    
+    //[AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     return YES;
 }
 							

@@ -41,12 +41,11 @@
 {
     NSString *path = nil;
     switch (type) {
-//        case ENUM_API_REQUEST_FULLFILL_OPEN_REQUESTS:
-//        {
-//            path = [NSString stringWithFormat:API_URL_FULLFILL_OPEN_REQUESTS, params[@"open_request_id"]];
-//            [params removeObjectForKey:@"open_request_id"];
-//            break;
-//        }
+        case ENUM_API_REQUEST_GET_MATCHS_INFO:
+        {
+            path = STRING_REQUEST_GET_MATCHS_INFO;
+            break;
+        }
             
         default:
             break;
@@ -61,10 +60,12 @@
     AFHTTPRequestOperation *op;
     if (methodKind) { // POST
         if (view) [MBProgressHUD showHUDAddedTo:view animated:YES];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         op = [self.requestManager POST:path
                            parameters:params
                               success:^(AFHTTPRequestOperation *operation, id responseObject)
               {
+                  [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                   if (view) [MBProgressHUD hideHUDForView:view animated:YES];
                   
                   // call complete block
@@ -72,6 +73,7 @@
                   block(responseObject);
                   }
               } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                   if (view) [MBProgressHUD hideHUDForView:view animated:YES];
                   
                   // call fail block
@@ -81,11 +83,13 @@
               }];
     }
     else { // GET
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         if (view) [MBProgressHUD showHUDAddedTo:view animated:YES];
         op = [self.requestManager GET:path
                       parameters:params
                          success:^(AFHTTPRequestOperation *operation, id responseObject)
          {
+             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
              if (view) [MBProgressHUD hideAllHUDsForView:view animated:YES];
              
              // call complete block
@@ -93,6 +97,7 @@
              block(responseObject);
              }
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
              if (view) [MBProgressHUD hideAllHUDsForView:view animated:YES];
              
              // call fail block
@@ -123,6 +128,7 @@
     }
     
     path = [[WebserviceManager sharedInstance] fullURLRequestWithAPI:path];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     if (view) [MBProgressHUD showHUDAddedTo:view animated:YES];
     AFHTTPRequestOperation *op = [self.requestManager POST:path parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         // append data
@@ -142,6 +148,7 @@
         }
         
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         if (view) [MBProgressHUD hideHUDForView:view animated:YES];
         
         // call complete block
@@ -150,6 +157,7 @@
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         if (view) [MBProgressHUD hideHUDForView:view animated:YES];
         
         // call fail block

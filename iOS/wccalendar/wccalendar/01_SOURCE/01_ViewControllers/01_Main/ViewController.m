@@ -51,11 +51,44 @@
     }
     
     [self initInterface];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(getMatchsInfo)
+                                                name:UIApplicationDidBecomeActiveNotification
+                                              object:nil];
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+}
+
+-(void)getMatchsInfo
+{
+    [[WebserviceManager sharedInstance] operationWithType:ENUM_API_REQUEST_GET_MATCHS_INFO andPostMethodKind:NO andParams:nil inView:nil completeBlock:^(id responseObject) {
+        [self updateMatchsInfo:responseObject];
+    } failureBlock:^(NSError *error) {
+        
+    }];
+}
+
+-(void)updateMatchsInfo:(NSArray*)data
+{
+    for (NSDictionary *dic in data) {
+        [MatchItem updateMatch:dic];
+    }
+    
+    // save context
+    [[AppViewController Shared] saveContext];
+    
+    _fetchedResultsController = nil;
+    // reload view
+    [self.tableView reloadData];
 }
 
 -(void)addSampleData

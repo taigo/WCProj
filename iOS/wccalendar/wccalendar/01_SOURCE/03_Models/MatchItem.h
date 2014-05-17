@@ -26,4 +26,5 @@
 @property (nonatomic, retain) TeamModel *teamAway;
 @property (nonatomic, retain) Group *group;
 
++(void)updateMatch:(NSDictionary*)data;
 @end

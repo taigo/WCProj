@@ -29,4 +29,5 @@
 - (void)addMatchs:(NSSet *)values;
 - (void)removeMatchs:(NSSet *)values;
 
++ (TeamModel*)teamWithID:(NSString*)teamID;
 @end

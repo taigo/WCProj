@@ -9,7 +9,7 @@
 #import "TeamModel.h"
 #import "Group.h"
 #import "MatchItem.h"
-
+#import "AppViewController.h"
 
 @implementation TeamModel
 
@@ -31,5 +31,21 @@
     NSString *stringToReturn = [[self.name uppercaseString] substringToIndex:1];
     [self didAccessValueForKey:@"initialTitle"];
     return stringToReturn;
+}
+
++(TeamModel *)teamWithID:(NSString *)teamID
+{
+    NSManagedObjectContext *managedObjectContext = [AppViewController Shared].managedObjectContext;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:WC_TEAM_MODEL];
+    
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"teamID" ascending:YES selector:@selector(compare:)];
+    fetchRequest.sortDescriptors = @[sortDescriptor];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"teamID = %@", teamID];
+    [fetchRequest setPredicate:predicate];
+    //    fetchRequest.predicate = predicate;
+    NSArray *results = [managedObjectContext executeFetchRequest:fetchRequest error:nil];
+    
+    return [results count] > 0 ? results[0] : nil;
 }
 @end
