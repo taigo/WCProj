@@ -131,6 +131,9 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:WC_TEAM_MODEL inManagedObjectContext:_managedObjectContext];
     [fetchRequest setEntity:entity];
     
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"imageUrl != nil"];
+    [fetchRequest setPredicate:predicate];
+    
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     

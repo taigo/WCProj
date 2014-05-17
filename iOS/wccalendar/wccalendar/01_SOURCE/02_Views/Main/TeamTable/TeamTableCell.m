@@ -22,16 +22,16 @@
         _nameLbl = [[UILabel alloc] initWithFrame:CGRectMake(55, 18, 255.0f, 23.0f)];
         _nameLbl.font = [UIFont fontWithName:FONT_APP_REGULAR size:17.0f];
         _nameLbl.textColor = [UIColor darkGrayColor];
-//        [self addSubview:_nameLbl];
+        [self addSubview:_nameLbl];
         
         // image
         _logoImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 18, 35, 23)];
-//        [self addSubview:_logoImage];
+        [self addSubview:_logoImage];
         
         // separator
         UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, TEAM_TABLE_CELL_HEIGHT - 0.5f, WIDTH_IPHONE, 0.5f)];
         [separator setBackgroundColor:[UIColor grayColor]];
-//        [self addSubview:separator];
+        [self addSubview:separator];
     }
     return self;
 }

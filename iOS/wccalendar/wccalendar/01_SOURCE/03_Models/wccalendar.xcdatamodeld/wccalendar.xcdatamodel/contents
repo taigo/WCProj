@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5063" systemVersion="13C1021" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Group" representedClassName="Group" syncable="YES">
+        <attribute name="groupID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="matchs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MatchItem" inverseName="group" inverseEntity="MatchItem" syncable="YES"/>
+        <relationship name="teams" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TeamModel" inverseName="group" inverseEntity="TeamModel" syncable="YES"/>
+    </entity>
     <entity name="MatchItem" representedClassName="MatchItem" syncable="YES">
         <attribute name="alertTime" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="datetime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="day" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="matchID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="matchNum" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="score" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="time" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="team1" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeamModel" syncable="YES"/>
-        <relationship name="team2" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeamModel" syncable="YES"/>
+        <attribute name="stadium" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="stage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="venue" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Group" inverseName="matchs" inverseEntity="Group" syncable="YES"/>
+        <relationship name="teamAway" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeamModel" syncable="YES"/>
+        <relationship name="teamHome" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeamModel" syncable="YES"/>
     </entity>
     <entity name="TeamModel" representedClassName="TeamModel" syncable="YES">
         <attribute name="imageUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="initialTitle" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="shortName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="teamID" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Group" inverseName="teams" inverseEntity="Group" syncable="YES"/>
         <relationship name="matchs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MatchItem" syncable="YES"/>
     </entity>
     <elements>
-        <element name="MatchItem" positionX="-234" positionY="-79" width="128" height="148"/>
-        <element name="TeamModel" positionX="160" positionY="-81" width="128" height="118"/>
+        <element name="MatchItem" positionX="-243" positionY="-81" width="128" height="223"/>
+        <element name="TeamModel" positionX="160" positionY="-81" width="128" height="148"/>
+        <element name="Group" positionX="-38" positionY="125" width="128" height="103"/>
     </elements>
 </model>

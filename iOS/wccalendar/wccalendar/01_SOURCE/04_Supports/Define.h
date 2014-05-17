@@ -62,6 +62,7 @@
 #define kSqliteFileName     @"wccalendar"
 #define WC_TEAM_MODEL       @"TeamModel"
 #define WC_MATCH_MODEL      @"MatchItem"
+#define WC_GROUP_MODEL      @"Group"
 
 typedef enum {
     enumAlertTime_None,

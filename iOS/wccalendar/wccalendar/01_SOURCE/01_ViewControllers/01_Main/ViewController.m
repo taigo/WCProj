@@ -12,6 +12,24 @@
 #import "CommonHeaderView.h"
 #import "TeamFilterViewController.h"
 #import "TimeSelectorViewController.h"
+#import "Group.h"
+
+// data key
+#define kDataStage @"stage"
+#define kDataMatchNum @"match_num"
+#define kDataGroup @"group"
+#define kDataGroupID @"groupid"
+#define kDataLocationStadium @"location_stadium"
+#define kDataLocationVenue @"location_venue"
+#define kDataTeamHome @"team_home"
+#define kDataTeamAway @"team_away"
+#define kDataFlag @"flag_img"
+#define kDataFullName @"fullname"
+#define kDataShortName @"shortname"
+#define kDataTimeUTC @"timeutc"
+#define kDataDayMonthUTC @"daymonthutc"
+#define kDataDaytimeUTC @"datetime"
+#define kDataTeamID @"team_id"
 
 @interface ViewController () <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, CommonHeaderDelegate, TeamFilterDelegate, TimeSelectorDelegate>
 @property (weak, nonatomic) IBOutlet CommonHeaderView *headerView;
@@ -29,7 +47,7 @@
     _filteredTeam = nil;
 	// Do any additional setup after loading the view, typically from a nib.
     if ([self.fetchedResultsController.fetchedObjects count] == 0) {
-        [self addSampleData];
+        [self addData];
     }
     
     [self initInterface];
@@ -43,34 +61,136 @@
 -(void)addSampleData
 {
     
-        // add team
-        NSManagedObjectContext *managedObjectContext = [AppViewController Shared].managedObjectContext;
-        TeamModel *team1 = [NSEntityDescription insertNewObjectForEntityForName:WC_TEAM_MODEL inManagedObjectContext:managedObjectContext];
-        team1.name = @"BRA";
-        team1.imageUrl = @"bra.png";
-        
-        TeamModel *team2 = [NSEntityDescription insertNewObjectForEntityForName:WC_TEAM_MODEL inManagedObjectContext:managedObjectContext];
-        team2.name = @"CRO";
-        team2.imageUrl = @"cro.png";
+    // add team
+    NSManagedObjectContext *managedObjectContext = [AppViewController Shared].managedObjectContext;
+    TeamModel *team1 = [NSEntityDescription insertNewObjectForEntityForName:WC_TEAM_MODEL inManagedObjectContext:managedObjectContext];
+    team1.name = @"BRA";
+    team1.imageUrl = @"bra.png";
+    
+    TeamModel *team2 = [NSEntityDescription insertNewObjectForEntityForName:WC_TEAM_MODEL inManagedObjectContext:managedObjectContext];
+    team2.name = @"CRO";
+    team2.imageUrl = @"cro.png";
     
     for (NSInteger i = 0; i < 5; i++) {
         // add match
         MatchItem *match1 = [NSEntityDescription insertNewObjectForEntityForName:WC_MATCH_MODEL inManagedObjectContext:managedObjectContext];
         match1.matchID = [NSString stringWithFormat:@"%d", i];
-        match1.time = [NSDate date];
+        match1.datetime = [NSDate date];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        TTLog(@"%@", match1.time);
+        TTLog(@"%@", match1.datetime);
         formatter.dateFormat = @"yyyy/MM/dd";
-        NSString *dateStr = [formatter stringFromDate:match1.time];
+        NSString *dateStr = [formatter stringFromDate:match1.datetime];
         formatter.dateFormat = @"yyyy/MM/dd";
         match1.day = [formatter dateFromString:dateStr];
-        [match1 setTeam1:team1];
-        [match1 setTeam2:team2];
+        [match1 setTeamHome:team1];
+        [match1 setTeamAway:team2];
         // add match to team
         [team1 addMatchsObject:match1];
         [team2 addMatchsObject:match1];
     }
     
+    
+    // save context
+    [[AppViewController Shared] saveContext];
+    
+    _fetchedResultsController = nil;
+    // reload view
+    [self.tableView reloadData];
+}
+
+-(void)addData
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"data" ofType:@"json"];
+    NSData *jsonData = [NSData dataWithContentsOfFile:path];
+    NSError *error;
+    NSDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
+    
+    NSManagedObjectContext *managedObjectContext = [AppViewController Shared].managedObjectContext;
+    // group
+    NSArray *groups = [jsonDic objectForKey:@"groups"];
+    NSMutableDictionary *id2Group = [NSMutableDictionary dictionary];
+    for (NSDictionary *dic in groups)
+    {
+        Group *item = [NSEntityDescription insertNewObjectForEntityForName:WC_GROUP_MODEL inManagedObjectContext:managedObjectContext];
+        item.groupID = [dic[kDataGroupID] stringValue];
+        item.name = dic[@"name"];
+        // add to id 2 group
+        [id2Group setObject:item forKey:item.groupID];
+    }
+    // team
+    NSArray *teams = [jsonDic objectForKey:@"teams"];
+    NSMutableDictionary *id2Team = [NSMutableDictionary dictionary];
+    for (NSDictionary *dic in teams)
+    {
+        TeamModel *item = [NSEntityDescription insertNewObjectForEntityForName:WC_TEAM_MODEL inManagedObjectContext:managedObjectContext];
+        item.teamID = dic[kDataTeamID];
+        item.name = dic[kDataFullName];
+        item.shortName = dic[kDataShortName];
+        item.imageUrl = dic[kDataFlag];
+        NSString *groupID = [dic[kDataGroupID] stringValue];
+        if ([id2Group objectForKey:groupID]) {
+            item.group = [id2Group objectForKey:groupID];
+        }
+        else {
+            NSLog(@"not have group");
+        }
+        
+        [id2Team setObject:item forKey:item.teamID];
+    }
+    // match
+    NSArray *matchs = [jsonDic objectForKey:@"matchs"];
+    for (NSDictionary *dic in matchs)
+    {
+        MatchItem *item = [NSEntityDescription insertNewObjectForEntityForName:WC_MATCH_MODEL inManagedObjectContext:managedObjectContext];
+        item.matchID = dic[@"matchid"];
+        item.stage = dic[kDataStage];
+        item.stadium = dic[kDataLocationStadium];
+        item.venue = dic[kDataLocationVenue];
+        item.matchNum = dic[kDataMatchNum];
+        NSString *groupID = [dic[kDataGroupID] stringValue];
+        if ([id2Group objectForKey:groupID]) {
+            item.group = [id2Group objectForKey:groupID];
+        }
+        else {
+            NSLog(@"not have group");
+        }
+        NSString *team_home = dic[kDataTeamHome];
+        if ([id2Team objectForKey:team_home]) {
+            item.teamHome = [id2Team objectForKey:team_home];
+        }
+        else {
+            NSLog(@"not have team home");
+        }
+        NSString *team_away = dic[kDataTeamAway];
+        if ([id2Team objectForKey:team_away]) {
+            item.teamAway = [id2Team objectForKey:team_away];
+        }
+        else {
+            NSLog(@"not have team away");
+        }
+        
+        // datetime
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+        formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss ZZZ";
+        NSDate *date = [formatter dateFromString:dic[kDataDaytimeUTC]];
+        
+        NSDateFormatter *formatterLocal = [[NSDateFormatter alloc] init];
+        [formatterLocal setTimeZone:[NSTimeZone localTimeZone]];
+        formatterLocal.dateFormat = @"yyyy-MM-dd HH:mm:ss ZZZ";
+        NSDate *date2 = [formatterLocal dateFromString:dic[kDataDaytimeUTC]];
+        NSString *temp = [formatterLocal stringFromDate:date2];
+        
+        item.datetime = [formatterLocal dateFromString:temp];
+        NSLog(@"%@", item.datetime);
+        
+        // day
+        formatterLocal.dateFormat = @"yyyy/MM/dd";
+        NSString *dateStr = [formatterLocal stringFromDate:item.datetime];
+        item.day = [formatterLocal dateFromString:dateStr];
+        NSLog(@"day = %@", item.day);
+        
+    }
     
     // save context
     [[AppViewController Shared] saveContext];
@@ -163,6 +283,7 @@
     
     MatchItem *item = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setTimeZone:[NSTimeZone localTimeZone]];
     formatter.dateFormat = @"EEEE dd MMMM";
     UILabel *textLbl = (id)[view viewWithTag:1000];
     textLbl.text = [[formatter stringFromDate:item.day] capitalizedString];
@@ -183,11 +304,11 @@
     [fetchRequest setEntity:entity];
     
     if (self.filteredTeam) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"team1 == %@ OR team2 == %@", self.filteredTeam, self.filteredTeam];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"teamHome == %@ OR teamAway == %@", self.filteredTeam, self.filteredTeam];
         [fetchRequest setPredicate:predicate];
     }
     
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"time"  ascending:YES];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"datetime"  ascending:YES];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     
     _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:_managedObjectContext sectionNameKeyPath:@"day" cacheName:nil];
@@ -234,7 +355,7 @@
     TimeSelectorViewController *controller = [TimeSelectorViewController new];
     controller.delegate = self;
     controller.object = match;
-    controller.selectedTime = [match.alertTime integerValue];
+    controller.selectedTime = [match.alertTime intValue];
     [self.navigationController pushViewController:controller animated:YES];
 }
 
@@ -257,32 +378,34 @@
     // create new notification
     UILocalNotification *localNotification = [[UILocalNotification alloc] init];
     
-    // set time
-    NSDate *fireDate = [self alertDateForMath:match];
+    
 
 //    // TODO: for testing
 //    NSDate *date = [NSDate date];
 //    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
 //    NSDateComponents *components = [[NSDateComponents alloc] init];
 //    components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond fromDate:date];
-//    if (components.second + 10 > 60) {
+//    if (components.second + 5 > 60) {
 //        components.second = 0;
 //        components.minute +=1;
 //    }
 //    else {
-//        components.second += 10;
+//        components.second += 5;
 //    }
 //    NSDate *myNewDate = [calendar dateFromComponents:components];
 //    calendar = nil;
 //    components = nil;
-//    
-//    // TODO: set time for testing notification
+//    localNotification.fireDate = myNewDate;
+    
+    // TODO: set time for testing notification
+    // set time
+    NSDate *fireDate = [self alertDateForMath:match];
     localNotification.fireDate = fireDate;
     NSLog(@"Notification will be shown on: %@",localNotification.fireDate);
     localNotification.timeZone = [NSTimeZone defaultTimeZone];
     
     // set message
-    localNotification.alertBody = [NSString stringWithFormat:@"Match %@ - %@ will begin %@.", match.team1.name, match.team2.name, [self stringFromAlertTime:match.alertTime]];
+    localNotification.alertBody = [NSString stringWithFormat:@"Match %@ - %@ will begin %@.", match.teamHome.name, match.teamAway.name, [self stringFromAlertTime:match.alertTime]];
     localNotification.alertAction = NSLocalizedString(@"View details", nil);
     
     // set user info
@@ -331,41 +454,41 @@
     NSDate *date = nil;
     switch (match.alertTime.integerValue) {
         case enumAlertTime_OnTime:
-            date = match.time;
+            date = match.datetime;
             break;
         case enumAlertTime_5Mins:
-            date = [match.time dateByAddingTimeInterval:(-5*60)];
+            date = [match.datetime dateByAddingTimeInterval:(-5*60)];
             break;
         case enumAlertTime_15Mins:
-            date = [match.time dateByAddingTimeInterval:(-15*60)];
+            date = [match.datetime dateByAddingTimeInterval:(-15*60)];
             break;
         case enumAlertTime_30Mins:
-            date = [match.time dateByAddingTimeInterval:(-30*60)];
+            date = [match.datetime dateByAddingTimeInterval:(-30*60)];
             break;
         case enumAlertTime_1hour:
-            date = [match.time dateByAddingTimeInterval:(-60*60)];
+            date = [match.datetime dateByAddingTimeInterval:(-60*60)];
             break;
         case enumAlertTime_2hours:
-            date = [match.time dateByAddingTimeInterval:(-2*60*60)];
+            date = [match.datetime dateByAddingTimeInterval:(-2*60*60)];
             break;
         case enumAlertTime_3hours:
-            date = [match.time dateByAddingTimeInterval:(-3*60*60)];
+            date = [match.datetime dateByAddingTimeInterval:(-3*60*60)];
             break;
         case enumAlertTime_1day:
-            date = [match.time dateByAddingTimeInterval:(-24*60*60)];
+            date = [match.datetime dateByAddingTimeInterval:(-24*60*60)];
             break;
         case enumAlertTime_2days:
-            date = [match.time dateByAddingTimeInterval:(-2*24*60*60)];
+            date = [match.datetime dateByAddingTimeInterval:(-2*24*60*60)];
             break;
         case enumAlertTime_1week:
-            date = [match.time dateByAddingTimeInterval:(-7*24*60*60)];
+            date = [match.datetime dateByAddingTimeInterval:(-7*24*60*60)];
             break;
             
         default:
             break;
     }
     
-    TTLog(@"old = %@", match.time);
+    TTLog(@"old = %@", match.datetime);
     TTLog(@"new = %@", date);
     
     return date;

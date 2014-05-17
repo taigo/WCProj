@@ -23,33 +23,33 @@
         _dateLbl.font = [UIFont fontWithName:FONT_APP_THIN size:12.0f];
         _dateLbl.textColor = [UIColor grayColor];
         _dateLbl.numberOfLines = 0;
-//        [self addSubview:_dateLbl];
+        [self addSubview:_dateLbl];
         
         // team1's image
         _team1_ImgView = [[UIImageView alloc] initWithFrame:CGRectMake(70, 18, 35, 23)];
-//        [self addSubview:_team1_ImgView];
+        [self addSubview:_team1_ImgView];
         // team1's name label
         _team1_NameLbl = [[UILabel alloc] initWithFrame:CGRectMake(9 + CGRectGetMaxX(_team1_ImgView.frame), 15, 45.0f, 30.0f)];
         _team1_NameLbl.font = [UIFont fontWithName:FONT_APP_REGULAR size:17.0f];
         _team1_NameLbl.textColor = [UIColor darkGrayColor];
-//        [self addSubview:_team1_NameLbl];
+        [self addSubview:_team1_NameLbl];
         
         // score/time label
         _timeLbl = [[UILabel alloc] initWithFrame:CGRectMake(160, 15, 50.0f, 30.0f)];
         _timeLbl.font = [UIFont fontWithName:FONT_APP_REGULAR size:17.0f];
         _timeLbl.textColor = [UIColor darkGrayColor];
         _timeLbl.textAlignment = NSTextAlignmentCenter;
-//        [self addSubview:_timeLbl];
+        [self addSubview:_timeLbl];
         
         // team2's name label
         _team2_NameLbl = [[UILabel alloc] initWithFrame:CGRectMake(230, 15, 45.0f, 30.0f)];
         _team2_NameLbl.font = [UIFont fontWithName:FONT_APP_REGULAR size:17.0f];
         _team2_NameLbl.textColor = [UIColor darkGrayColor];
         _timeLbl.textAlignment = NSTextAlignmentRight;
-//        [self addSubview:_team2_NameLbl];
+        [self addSubview:_team2_NameLbl];
         // team2's image
         _team2_ImgView = [[UIImageView alloc] initWithFrame:CGRectMake(274, 18, 35, 23)];
-//        [self addSubview:_team2_ImgView];
+        [self addSubview:_team2_ImgView];
         
         // separator
         UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, MATCH_TABLE_CELL_HEIGHT - 0.5f, WIDTH_IPHONE, 0.5f)];
@@ -79,6 +79,7 @@
     
     MatchItem *item = object;
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setTimeZone:[NSTimeZone localTimeZone]];
     formatter.dateFormat = @"dd MMM yyyy";
     // date
     self.dateLbl.text = [[formatter stringFromDate:item.day] uppercaseString];
@@ -89,18 +90,18 @@
     else {
         // show time
         formatter.dateFormat = @"HH:mm";
-        self.timeLbl.text = [[formatter stringFromDate:item.time] uppercaseString];
+        self.timeLbl.text = [[formatter stringFromDate:item.datetime] uppercaseString];
     }
     
     // team 1
-    TeamModel *team = item.team1;
+    TeamModel *team = item.teamHome;
     self.team1_ImgView.image = [UIImage imageNamed:team.imageUrl];
-    self.team1_NameLbl.text = team.name;
+    self.team1_NameLbl.text = team.shortName;
     
     // team 2
-    team = item.team2;
+    team = item.teamAway;
     self.team2_ImgView.image = [UIImage imageNamed:team.imageUrl];
-    self.team2_NameLbl.text = team.name;
+    self.team2_NameLbl.text = team.shortName;
     
 }
 
