@@ -13,6 +13,7 @@
 #import "TeamFilterViewController.h"
 #import "TimeSelectorViewController.h"
 #import "Group.h"
+#import "MatchDetailViewController.h"
 
 // data key
 #define kDataStage @"stage"
@@ -289,7 +290,10 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self showAlertTimeSelectorForItem:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+//    [self showAlertTimeSelectorForItem:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+    MatchDetailViewController *matchDetail = [MatchDetailViewController new];
+    [matchDetail setObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+    [self.navigationController pushViewController:matchDetail animated:YES];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

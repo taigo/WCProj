@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1818F0CB192E546200613E43 /* MatchDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818F0C9192E546200613E43 /* MatchDetailViewController.m */; };
+		1818F0CC192E546200613E43 /* MatchDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1818F0CA192E546200613E43 /* MatchDetailViewController.xib */; };
 		181E8865192709DB00EB41C6 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 181E8864192709DB00EB41C6 /* data.json */; };
 		181E887419270C3700EB41C6 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E887319270C3700EB41C6 /* Group.m */; };
 		181E8877192715C900EB41C6 /* TeamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E8876192715C900EB41C6 /* TeamModel.m */; };
@@ -132,6 +134,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1818F0C8192E546200613E43 /* MatchDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchDetailViewController.h; sourceTree = "<group>"; };
+		1818F0C9192E546200613E43 /* MatchDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchDetailViewController.m; sourceTree = "<group>"; };
+		1818F0CA192E546200613E43 /* MatchDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchDetailViewController.xib; sourceTree = "<group>"; };
 		181E8864192709DB00EB41C6 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
 		181E887219270C3700EB41C6 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
 		181E887319270C3700EB41C6 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
@@ -303,6 +308,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1818F0C7192E53FD00613E43 /* 02_DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				1818F0C8192E546200613E43 /* MatchDetailViewController.h */,
+				1818F0C9192E546200613E43 /* MatchDetailViewController.m */,
+				1818F0CA192E546200613E43 /* MatchDetailViewController.xib */,
+			);
+			path = 02_DetailView;
+			sourceTree = "<group>";
+		};
 		188CC5E1191B79CD00DC303C = {
 			isa = PBXGroup;
 			children = (
@@ -527,6 +542,7 @@
 		18EC2C55191E1E5100117123 /* 01_ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				1818F0C7192E53FD00613E43 /* 02_DetailView */,
 				18EC2C5C191E1EA300117123 /* 01_Main */,
 			);
 			path = 01_ViewControllers;
@@ -788,6 +804,7 @@
 				181E88CB19271CC300EB41C6 /* esp.png in Resources */,
 				181E88E219271CC300EB41C6 /* ita.png in Resources */,
 				181E88EA19271CC300EB41C6 /* nga.png in Resources */,
+				1818F0CC192E546200613E43 /* MatchDetailViewController.xib in Resources */,
 				181E88D319271CC300EB41C6 /* por(1).png in Resources */,
 				181E88BF19271CC300EB41C6 /* bel.png in Resources */,
 				181E88F019271CC300EB41C6 /* cmr(1).png in Resources */,
@@ -846,6 +863,7 @@
 				18EC2C6E191E20E900117123 /* MatchTableCell.m in Sources */,
 				18AFAF2F192086940074A69D /* AFHTTPSessionManager.m in Sources */,
 				181E88C819271CC300EB41C6 /* main.js in Sources */,
+				1818F0CB192E546200613E43 /* MatchDetailViewController.m in Sources */,
 				188CC5FA191B79CE00DC303C /* main.m in Sources */,
 				18AFAEF51920827F0074A69D /* SupportFunction.m in Sources */,
 			);
