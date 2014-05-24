@@ -26,6 +26,11 @@
         
         // image
         _logoImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 18, 35, 23)];
+        _logoImage.layer.shadowColor = [UIColor blackColor].CGColor;
+        _logoImage.layer.shadowOffset = CGSizeMake(0.0, 0.3);
+        _logoImage.layer.shadowOpacity = 0.7;
+        _logoImage.layer.shadowRadius = 0.8;
+        _logoImage.clipsToBounds = NO;
         [self addSubview:_logoImage];
         
         // separator

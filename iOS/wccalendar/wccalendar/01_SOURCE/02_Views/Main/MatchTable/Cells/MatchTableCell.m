@@ -27,6 +27,11 @@
         
         // team1's image
         _team1_ImgView = [[UIImageView alloc] initWithFrame:CGRectMake(70, 18, 35, 23)];
+        _team1_ImgView.layer.shadowColor = [UIColor blackColor].CGColor;
+        _team1_ImgView.layer.shadowOffset = CGSizeMake(0.0, 0.3);
+        _team1_ImgView.layer.shadowOpacity = 0.7;
+        _team1_ImgView.layer.shadowRadius = 0.8;
+        _team1_ImgView.clipsToBounds = NO;
         [self addSubview:_team1_ImgView];
         // team1's name label
         _team1_NameLbl = [[UILabel alloc] initWithFrame:CGRectMake(9 + CGRectGetMaxX(_team1_ImgView.frame), 15, 45.0f, 30.0f)];
@@ -49,7 +54,18 @@
         [self addSubview:_team2_NameLbl];
         // team2's image
         _team2_ImgView = [[UIImageView alloc] initWithFrame:CGRectMake(274, 18, 35, 23)];
+        _team2_ImgView.layer.shadowColor = [UIColor blackColor].CGColor;
+        _team2_ImgView.layer.shadowOffset = CGSizeMake(0.0, 0.3);
+        _team2_ImgView.layer.shadowOpacity = 0.7;
+        _team2_ImgView.layer.shadowRadius = 0.8;
+        _team2_ImgView.clipsToBounds = NO;
         [self addSubview:_team2_ImgView];
+        
+        // alarm button
+        _alarmBtn = [[UIButton alloc] initWithFrame:CGRectMake(160, 2, 50, 50)];
+        _alarmBtn.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
+        [self addSubview:_alarmBtn];
+        [_alarmBtn addTarget:self action:@selector(alarmBtnTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
         
         // separator
         UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, MATCH_TABLE_CELL_HEIGHT - 0.5f, WIDTH_IPHONE, 0.5f)];
@@ -67,6 +83,11 @@
  // Drawing code
  }
  */
+
+-(void)alarmBtnTouchUpInside
+{
+    [self.delegate matchCellDidSelectSetAlarm:self];
+}
 
 +(CGFloat)tableView:(UITableView *)tableView rowHeightForObject:(id)object
 {
@@ -102,6 +123,20 @@
     team = item.teamAway;
     self.team2_ImgView.image = [UIImage imageNamed:team.imageUrl];
     self.team2_NameLbl.text = team.shortName;
+    
+    if ([item.datetime timeIntervalSinceNow] > 0) {
+        self.alarmBtn.hidden = NO;
+        if ([item.alertTime intValue] > enumAlertTime_None) {
+            // has alarm
+            [self.alarmBtn setImage:[UIImage imageNamed:@"alarm_on.png"] forState:UIControlStateNormal];
+        }
+        else {
+            [self.alarmBtn setImage:[UIImage imageNamed:@"alarm_off.png"] forState:UIControlStateNormal];
+        }
+    }
+    else {
+        self.alarmBtn.hidden = YES;
+    }
     
 }
 

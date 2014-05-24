@@ -14,7 +14,7 @@
 @interface TimeSelectorViewController () <UITableViewDataSource, UITableViewDelegate, CommonHeaderDelegate>
 @property (weak, nonatomic) IBOutlet CommonHeaderView *headerView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSMutableArray *datasource;
+@property (strong, nonatomic) NSArray *datasource;
 @end
 
 @implementation TimeSelectorViewController
@@ -36,19 +36,7 @@
     [self initInterface];
     
     // init datasource
-    _datasource = [NSMutableArray arrayWithObjects:
-                   @"None",
-                   @"At time of match",
-                   @"5 minutes before",
-                   @"15 minutes before",
-                   @"30 minutes before",
-                   @"1 hour before",
-                   @"2 hours before",
-                   @"3 hours before",
-                   @"1 day before",
-                   @"2 days before",
-                   @"1 week before",
-                   nil];
+    _datasource = kAlertTimeTexts;
 }
 
 - (void)didReceiveMemoryWarning

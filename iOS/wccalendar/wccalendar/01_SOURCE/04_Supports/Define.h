@@ -6,7 +6,9 @@
 
 #import "SupportFunction.h"
 
+#if DEBUG
 #define VKDEBUG 1
+#endif
 
 #if VKDEBUG
 #define TTLog(fmt, ...) TTLoga((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
@@ -64,6 +66,8 @@
 #define WC_MATCH_MODEL      @"MatchItem"
 #define WC_GROUP_MODEL      @"Group"
 
+#define MY_BANNER_UNIT_ID @"ca-app-pub-9884961992065285/1071883851"
+
 typedef enum {
     enumAlertTime_None,
     enumAlertTime_OnTime,   // at time of event
@@ -78,5 +82,8 @@ typedef enum {
     enumAlertTime_1week,    // 1 week before
     enumAlertTime_Num
 }enumAlertTime;
+
+#define kAlertTimeTexts @[@"None", @"At time of match", @"5 minutes before", @"15 minutes before", @"30 minutes before", @"1 hour before", @"2 hours before", @"3 hours before", @"1 day before", @"2 days before", @"1 week before"]
+
 
 

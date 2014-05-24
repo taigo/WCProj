@@ -8,7 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@class MatchItem;
+@class MatchItem, MatchDetailViewController;
+
+@protocol MatchDetailViewDelegate <NSObject>
+
+-(void)matchDetailDidSetAlarm:(MatchDetailViewController*)controller;
+
+@end
+
 @interface MatchDetailViewController : UIViewController
 @property (weak, nonatomic) MatchItem *object;
+@property (weak, nonatomic) id<MatchDetailViewDelegate> delegate;
+@property (assign, nonatomic) BOOL shouldShowAlarmSelector;
 @end
