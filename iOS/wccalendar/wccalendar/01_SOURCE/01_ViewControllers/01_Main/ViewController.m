@@ -267,7 +267,7 @@
 -(void)initInterface
 {
     // setup header
-    [self.headerView loadWithTitle:@"MATCHS" withLeftButton:NO leftImage:nil leftText:nil withRightButton:YES rightImage:[UIImage imageNamed:@"home_icon_fillter"]];
+    [self.headerView loadWithTitle:@"WORLD CUP 2014" withLeftButton:NO leftImage:nil leftText:nil withRightButton:YES rightImage:[UIImage imageNamed:@"home_icon_fillter"]];
     self.headerView.rightBtn.frame = CGRectMake(275, 27, 32, 32);
     self.headerView.delegate = self;
 }
@@ -390,6 +390,17 @@
     [controller.navigationController popViewControllerAnimated:YES];
     
     self.filteredTeam = item;
+    if (item == nil)
+    {
+        // clear filter
+        self.headerView.rightBtn.frame = CGRectMake(275, 27, 32, 32);
+        [self.headerView.rightBtn setImage:[UIImage imageNamed:@"home_icon_fillter"] forState:UIControlStateNormal];
+    }
+    else {
+        // team filter
+        self.headerView.rightBtn.frame = CGRectMake(275, 30, 35, 23);
+        [self.headerView.rightBtn setImage:[UIImage imageNamed:item.imageUrl] forState:UIControlStateNormal];
+    }
     // re-fetch datasource
     _fetchedResultsController = nil;
     // reload view
