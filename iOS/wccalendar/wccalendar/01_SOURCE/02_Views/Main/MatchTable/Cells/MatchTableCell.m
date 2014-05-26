@@ -7,6 +7,7 @@
 //
 
 #import "MatchTableCell.h"
+#import "Group.h"
 
 #define MATCH_TABLE_CELL_HEIGHT 60.0f
 
@@ -19,11 +20,20 @@
         self.backgroundColor = [UIColor clearColor];
         // Initialization code
         // day label
-        _dateLbl = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, 50.0f, 35.0f)];
+        _dateLbl = [[UILabel alloc] initWithFrame:CGRectMake(6, 1, 120.0f, 16.0f)];
         _dateLbl.font = [UIFont fontWithName:FONT_APP_THIN size:12.0f];
         _dateLbl.textColor = [UIColor grayColor];
         _dateLbl.numberOfLines = 0;
         [self addSubview:_dateLbl];
+//        _dateLbl.backgroundColor = [UIColor greenColor];
+        
+        // group label
+        _groupLbl = [[UILabel alloc] initWithFrame:CGRectMake(6, 17, 55.0f, 20.0f)];
+        _groupLbl.font = [UIFont fontWithName:FONT_APP_THIN size:12.0f];
+        _groupLbl.textColor = [UIColor grayColor];
+        _groupLbl.numberOfLines = 0;
+        [self addSubview:_groupLbl];
+//        _groupLbl.backgroundColor = [UIColor redColor];
         
         // team1's image
         _team1_ImgView = [[UIImageView alloc] initWithFrame:CGRectMake(70, 18, 35, 23)];
@@ -36,7 +46,7 @@
         // team1's name label
         _team1_NameLbl = [[UILabel alloc] initWithFrame:CGRectMake(9 + CGRectGetMaxX(_team1_ImgView.frame), 15, 45.0f, 30.0f)];
         _team1_NameLbl.font = [UIFont fontWithName:FONT_APP_REGULAR size:17.0f];
-        _team1_NameLbl.textColor = [UIColor darkGrayColor];
+        _team1_NameLbl.textColor = [UIColor blackColor];
         [self addSubview:_team1_NameLbl];
         
         // score/time label
@@ -49,7 +59,7 @@
         // team2's name label
         _team2_NameLbl = [[UILabel alloc] initWithFrame:CGRectMake(230, 15, 45.0f, 30.0f)];
         _team2_NameLbl.font = [UIFont fontWithName:FONT_APP_REGULAR size:17.0f];
-        _team2_NameLbl.textColor = [UIColor darkGrayColor];
+        _team2_NameLbl.textColor = [UIColor blackColor];
         _timeLbl.textAlignment = NSTextAlignmentRight;
         [self addSubview:_team2_NameLbl];
         // team2's image
@@ -62,7 +72,7 @@
         [self addSubview:_team2_ImgView];
         
         // alarm button
-        _alarmBtn = [[UIButton alloc] initWithFrame:CGRectMake(160, 2, 50, 50)];
+        _alarmBtn = [[UIButton alloc] initWithFrame:CGRectMake(163, 2, 50, 35)];
         _alarmBtn.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
         [self addSubview:_alarmBtn];
         [_alarmBtn addTarget:self action:@selector(alarmBtnTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
@@ -103,7 +113,8 @@
     [formatter setTimeZone:[NSTimeZone localTimeZone]];
     formatter.dateFormat = @"dd MMM yyyy";
     // date
-    self.dateLbl.text = [[formatter stringFromDate:item.day] uppercaseString];
+    self.dateLbl.text = item.stage;//[[formatter stringFromDate:item.day] uppercaseString];
+    
     // score/time
     if (item.score && ![item.score isEqualToString:@""]) {
         self.timeLbl.text = item.score;
@@ -113,6 +124,12 @@
         formatter.dateFormat = @"HH:mm";
         self.timeLbl.text = [[formatter stringFromDate:item.datetime] uppercaseString];
     }
+    
+    // group
+    if ([item.stage isEqualToString:item.group.name]) {
+        self.groupLbl.text = @"";
+    }
+    else self.groupLbl.text = item.group.name;
     
     // team 1
     TeamModel *team = item.teamHome;

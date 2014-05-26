@@ -19,6 +19,7 @@
 
 @interface MatchTableCell : CommonTableViewCell
 @property (strong, nonatomic) UILabel *dateLbl;
+@property (strong, nonatomic) UILabel *groupLbl;
 @property (strong, nonatomic) UILabel *timeLbl;
 @property (strong, nonatomic) UILabel *team1_NameLbl;
 @property (strong, nonatomic) UILabel *team2_NameLbl;

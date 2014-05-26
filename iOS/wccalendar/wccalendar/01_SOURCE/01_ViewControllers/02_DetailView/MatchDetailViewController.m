@@ -11,6 +11,7 @@
 #import "AppViewController.h"
 #import "MatchItem.h"
 #import "TeamModel.h"
+#import "Group.h"
 #import <QuartzCore/QuartzCore.h>
 #import "TimeSelectorViewController.h"
 #import "GADBannerView.h"
@@ -145,6 +146,8 @@
     self.stadiumLbl.text = self.object.stadium;
     // revenue
     self.revenueLbl.text = self.object.venue;
+    // group
+    self.groupLbl.text = self.object.group.name;
     
     // team home
     self.h_imgView.image = [UIImage imageNamed:self.object.teamHome.imageUrl];
