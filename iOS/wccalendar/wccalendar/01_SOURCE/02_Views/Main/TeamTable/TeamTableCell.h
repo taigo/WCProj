@@ -9,6 +9,8 @@
 #import "CommonTableViewCell.h"
 #import "TeamModel.h"
 
+#define TEAM_TABLE_CELL_HEIGHT 60.0f
+
 @interface TeamTableCell : CommonTableViewCell
 @property (strong, nonatomic) UILabel *nameLbl;
 @property (strong, nonatomic) UIImageView *logoImage;

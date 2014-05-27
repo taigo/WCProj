@@ -1,14 +1,16 @@
 //
-//  TeamTableCell.m
+//  GroupTableViewCell.m
 //  wccalendar
 //
-//  Created by Tai Truong on 5/12/14.
+//  Created by Tai Truong on 5/27/14.
 //  Copyright (c) 2014 Tai Truong. All rights reserved.
 //
 
+#import "GroupTableViewCell.h"
 #import "TeamTableCell.h"
+#import "Group.h"
 
-@implementation TeamTableCell
+@implementation GroupTableViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -17,19 +19,10 @@
         self.backgroundColor = [UIColor clearColor];
         // Initialization code
         // name label
-        _nameLbl = [[UILabel alloc] initWithFrame:CGRectMake(55, 18, 255.0f, 23.0f)];
+        _nameLbl = [[UILabel alloc] initWithFrame:CGRectMake(10, 18, 255.0f, 23.0f)];
         _nameLbl.font = [UIFont fontWithName:FONT_APP_REGULAR size:17.0f];
         _nameLbl.textColor = [UIColor darkGrayColor];
         [self addSubview:_nameLbl];
-        
-        // image
-        _logoImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 18, 35, 23)];
-        _logoImage.layer.shadowColor = [UIColor blackColor].CGColor;
-        _logoImage.layer.shadowOffset = CGSizeMake(0.0, 0.3);
-        _logoImage.layer.shadowOpacity = 0.7;
-        _logoImage.layer.shadowRadius = 0.8;
-        _logoImage.clipsToBounds = NO;
-        [self addSubview:_logoImage];
         
         // separator
         UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, TEAM_TABLE_CELL_HEIGHT - 0.5f, WIDTH_IPHONE, 0.5f)];
@@ -57,8 +50,7 @@
 {
     [super setObject:object];
     
-    TeamModel *item = object;
-    self.logoImage.image = [UIImage imageNamed:item.imageUrl];
+    Group *item = object;
     self.nameLbl.text = item.name;
 }
 

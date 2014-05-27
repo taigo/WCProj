@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18098CDF1934373D003CCAED /* GroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18098CDE1934373D003CCAED /* GroupTableViewCell.m */; };
+		18098CE219344028003CCAED /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 18098CE119344028003CCAED /* Group.m */; };
 		1818F0CB192E546200613E43 /* MatchDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818F0C9192E546200613E43 /* MatchDetailViewController.m */; };
 		1818F0CC192E546200613E43 /* MatchDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1818F0CA192E546200613E43 /* MatchDetailViewController.xib */; };
 		181E8865192709DB00EB41C6 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 181E8864192709DB00EB41C6 /* data.json */; };
-		181E887419270C3700EB41C6 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E887319270C3700EB41C6 /* Group.m */; };
 		181E8877192715C900EB41C6 /* TeamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E8876192715C900EB41C6 /* TeamModel.m */; };
 		181E887A192715C900EB41C6 /* MatchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E8879192715C900EB41C6 /* MatchItem.m */; };
 		181E88BA19271CC300EB41C6 /* gre.png in Resources */ = {isa = PBXBuildFile; fileRef = 181E887B19271CC300EB41C6 /* gre.png */; };
@@ -147,12 +148,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		18098CDD1934373D003CCAED /* GroupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupTableViewCell.h; sourceTree = "<group>"; };
+		18098CDE1934373D003CCAED /* GroupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupTableViewCell.m; sourceTree = "<group>"; };
+		18098CE019344028003CCAED /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
+		18098CE119344028003CCAED /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
 		1818F0C8192E546200613E43 /* MatchDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchDetailViewController.h; sourceTree = "<group>"; };
 		1818F0C9192E546200613E43 /* MatchDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchDetailViewController.m; sourceTree = "<group>"; };
 		1818F0CA192E546200613E43 /* MatchDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchDetailViewController.xib; sourceTree = "<group>"; };
 		181E8864192709DB00EB41C6 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
-		181E887219270C3700EB41C6 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
-		181E887319270C3700EB41C6 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
 		181E8875192715C900EB41C6 /* TeamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamModel.h; sourceTree = "<group>"; };
 		181E8876192715C900EB41C6 /* TeamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamModel.m; sourceTree = "<group>"; };
 		181E8878192715C900EB41C6 /* MatchItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchItem.h; sourceTree = "<group>"; };
@@ -566,6 +569,8 @@
 			children = (
 				18AFAF5519210FAA0074A69D /* TeamTableCell.h */,
 				18AFAF5619210FAA0074A69D /* TeamTableCell.m */,
+				18098CDD1934373D003CCAED /* GroupTableViewCell.h */,
+				18098CDE1934373D003CCAED /* GroupTableViewCell.m */,
 			);
 			path = TeamTable;
 			sourceTree = "<group>";
@@ -603,12 +608,12 @@
 			isa = PBXGroup;
 			children = (
 				18AFAEE319207C060074A69D /* wccalendar.xcdatamodeld */,
+				18098CE019344028003CCAED /* Group.h */,
+				18098CE119344028003CCAED /* Group.m */,
 				181E8875192715C900EB41C6 /* TeamModel.h */,
 				181E8876192715C900EB41C6 /* TeamModel.m */,
 				181E8878192715C900EB41C6 /* MatchItem.h */,
 				181E8879192715C900EB41C6 /* MatchItem.m */,
-				181E887219270C3700EB41C6 /* Group.h */,
-				181E887319270C3700EB41C6 /* Group.m */,
 			);
 			path = 03_Models;
 			sourceTree = "<group>";
@@ -929,17 +934,18 @@
 				181E887A192715C900EB41C6 /* MatchItem.m in Sources */,
 				18EC2C65191E203100117123 /* CommonTableViewCell.m in Sources */,
 				181E8877192715C900EB41C6 /* TeamModel.m in Sources */,
+				18098CDF1934373D003CCAED /* GroupTableViewCell.m in Sources */,
 				18AFAF32192086940074A69D /* AFURLConnectionOperation.m in Sources */,
 				1823FE171922067E00E634F8 /* TimeSelectorViewController.m in Sources */,
 				18AFAF2E192086940074A69D /* AFHTTPRequestOperationManager.m in Sources */,
 				18AFAF30192086940074A69D /* AFNetworkReachabilityManager.m in Sources */,
 				18AFAF18192086830074A69D /* WebserviceManager.m in Sources */,
+				18098CE219344028003CCAED /* Group.m in Sources */,
 				18AFAF451920B8DA0074A69D /* CommonHeaderView.m in Sources */,
 				18EC2C5F191E1EC100117123 /* ViewController.m in Sources */,
 				18AFAF31192086940074A69D /* AFSecurityPolicy.m in Sources */,
 				188CC5FE191B79CE00DC303C /* AppDelegate.m in Sources */,
 				18AFAF33192086940074A69D /* AFURLRequestSerialization.m in Sources */,
-				181E887419270C3700EB41C6 /* Group.m in Sources */,
 				18AFAEE519207C060074A69D /* wccalendar.xcdatamodeld in Sources */,
 				18AFAF5719210FAA0074A69D /* TeamTableCell.m in Sources */,
 				18AFAF39192087B90074A69D /* MBProgressHUD.m in Sources */,
@@ -1098,7 +1104,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = wccalendar/wccalendar.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Vu Trong (5WX3ZR98FQ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "wccalendar/wccalendar-Prefix.pch";
 				INFOPLIST_FILE = "wccalendar/wccalendar-Info.plist";
@@ -1108,7 +1114,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "D0F1D51E-0B9E-4DC7-BB3C-6283A6ABAB4D";
+				PROVISIONING_PROFILE = "D3051C77-59AA-499A-9266-CEF955CAE957";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

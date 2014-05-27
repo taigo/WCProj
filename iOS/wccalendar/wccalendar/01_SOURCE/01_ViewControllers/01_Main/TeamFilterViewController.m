@@ -10,11 +10,14 @@
 #import "CommonHeaderView.h"
 #import "AppViewController.h"
 #import "TeamTableCell.h"
+#import "Group.h"
+#import "GroupTableViewCell.h"
 
 @interface TeamFilterViewController () <UITableViewDataSource, UITableViewDelegate, CommonHeaderDelegate>
 @property (weak, nonatomic) IBOutlet CommonHeaderView *headerView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) NSArray *groups;
 @end
 
 @implementation TeamFilterViewController
@@ -33,6 +36,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self initInterface];
+}
+
+-(NSArray *)groups
+{
+    if (!_groups) {
+        _groups = [Group getListGroup];
+    }
+    return _groups;
 }
 
 - (void)didReceiveMemoryWarning
@@ -77,45 +88,113 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [self.fetchedResultsController.sections count];
+    return [self.fetchedResultsController.sections count] + 1; // 1 for group section
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[self.fetchedResultsController.sections objectAtIndex:section] numberOfObjects];
+    if (section == 0) {
+        // group section
+        return [self.groups count];
+    }
+    
+    return [[self.fetchedResultsController.sections objectAtIndex:section-1] numberOfObjects];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [TeamTableCell tableView:tableView rowHeightForObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+    
+    return [TeamTableCell tableView:tableView rowHeightForObject:nil];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *cellID = [[TeamTableCell class] description];
-    TeamTableCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    if (!cell) {
-        cell = [[TeamTableCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
+    Class class;
+    id object;
+    if (indexPath.section == 0) {
+        // group section
+        class = [GroupTableViewCell class];
+        object = [self.groups objectAtIndex:indexPath.row];
+    }
+    else {
+        class = [TeamTableCell class];
+        indexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section-1];
+        object = [self.fetchedResultsController objectAtIndexPath:indexPath];
     }
     
-    [cell setObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+    NSString *cellID = [class description];
+    CommonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    if (!cell) {
+        cell = [[class alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
+    }
+    
+    [cell setObject:object];
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self.delegate teamFilter:self didSelect:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+    id object;
+    if (indexPath.section == 0) {
+        // group section
+        object = [self.groups objectAtIndex:indexPath.row];
+    }
+    else {
+        indexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section-1];
+        object = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    }
+    [self.delegate teamFilter:self didSelect:object];
 }
 
 -(NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
-    return self.fetchedResultsController.sectionIndexTitles;
+    NSMutableArray *titles = [NSMutableArray arrayWithArray:self.fetchedResultsController.sectionIndexTitles];
+    [titles insertObject:@"#" atIndex:0];
+    return titles;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
 {
-    return [self.fetchedResultsController sectionForSectionIndexTitle:title atIndex:index];
+    if ([title isEqualToString:@"#"]) {
+        return 0; // group section
+    }
+    index--;
+    return [self.fetchedResultsController sectionForSectionIndexTitle:title atIndex:index] + 1;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 0 || section == 1) {
+        // group section and first team section
+        return 25.0f;
+    }
+    return 0.0f;
+}
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (section > 1) {
+        return nil;
+    }
+
+    UIView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"filtertableheader"];
+    if (!view) {
+        view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_IPHONE, 25.0f)];
+        view.backgroundColor = [SupportFunction colorFromHexString:@"efeff4"];
+        UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, 25.0f - 0.5f, WIDTH_IPHONE, 0.5f)];
+        [separator setBackgroundColor:[UIColor grayColor]];
+        [view addSubview:separator];
+        
+        // text label
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 300, 25.0f)];
+        label.font = [UIFont fontWithName:FONT_APP_BOLD size:17.0f];
+        label.tag = 1000;
+        label.backgroundColor = [UIColor clearColor];
+        [view addSubview:label];
+    }
+    UILabel *textLbl = (id)[view viewWithTag:1000];
+    textLbl.text = section == 0 ? @"Groups" : @"Teams";
+    return view;
 }
 
 #pragma mark - Database methods

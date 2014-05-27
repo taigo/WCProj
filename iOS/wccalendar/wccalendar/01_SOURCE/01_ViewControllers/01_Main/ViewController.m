@@ -41,6 +41,7 @@
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 
 @property (strong, nonatomic) TeamModel *filteredTeam;
+@property (strong, nonatomic) Group *filteredGroup;
 @end
 
 @implementation ViewController
@@ -49,6 +50,7 @@
 {
     [super viewDidLoad];
     _filteredTeam = nil;
+    _filteredGroup = nil;
 	// Do any additional setup after loading the view, typically from a nib.
     if ([self.fetchedResultsController.fetchedObjects count] == 0) {
         [self addData];
@@ -169,10 +171,10 @@
     for (NSDictionary *dic in groups)
     {
         Group *item = [NSEntityDescription insertNewObjectForEntityForName:WC_GROUP_MODEL inManagedObjectContext:managedObjectContext];
-        item.groupID = [dic[kDataGroupID] stringValue];
+        item.groupID = dic[kDataGroupID];
         item.name = dic[@"name"];
         // add to id 2 group
-        [id2Group setObject:item forKey:item.groupID];
+        [id2Group setObject:item forKey:[item.groupID stringValue]];
     }
     // team
     NSArray *teams = [jsonDic objectForKey:@"teams"];
@@ -368,6 +370,10 @@
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"teamHome == %@ OR teamAway == %@", self.filteredTeam, self.filteredTeam];
         [fetchRequest setPredicate:predicate];
     }
+    else if (self.filteredGroup) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"group == %@", self.filteredGroup];
+        [fetchRequest setPredicate:predicate];
+    }
     
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"datetime"  ascending:YES];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
@@ -389,18 +395,38 @@
 {
     [controller.navigationController popViewControllerAnimated:YES];
     
-    self.filteredTeam = item;
-    if (item == nil)
-    {
-        // clear filter
-        self.headerView.rightBtn.frame = CGRectMake(275, 27, 32, 32);
-        [self.headerView.rightBtn setImage:[UIImage imageNamed:@"home_icon_fillter"] forState:UIControlStateNormal];
+    if (item) {
+        if ([item isKindOfClass:[Group class]]) {
+            // group filter
+            self.filteredTeam = nil;
+            self.filteredGroup = (id)item;
+            self.headerView.titleLbl.text = self.filteredGroup.name;
+        }
+        else {
+            // team filter
+            self.filteredTeam = item;
+            self.filteredGroup = nil;
+            self.headerView.titleLbl.text = self.filteredTeam.name;
+        }
     }
     else {
-        // team filter
-        self.headerView.rightBtn.frame = CGRectMake(275, 30, 35, 23);
-        [self.headerView.rightBtn setImage:[UIImage imageNamed:item.imageUrl] forState:UIControlStateNormal];
+        self.filteredGroup = nil;
+        self.filteredTeam = nil;
+        self.headerView.titleLbl.text = @"WORLD CUP 2014";
     }
+    
+//    if (self.filteredTeam == nil)
+//    {
+//        // clear filter
+//        self.headerView.rightBtn.frame = CGRectMake(275, 27, 32, 32);
+//        [self.headerView.rightBtn setImage:[UIImage imageNamed:@"home_icon_fillter"] forState:UIControlStateNormal];
+//    }
+//    else {
+//        // team filter
+//        self.headerView.rightBtn.frame = CGRectMake(275, 30, 35, 23);
+//        [self.headerView.rightBtn setImage:[UIImage imageNamed:item.imageUrl] forState:UIControlStateNormal];
+//    }
+    
     // re-fetch datasource
     _fetchedResultsController = nil;
     // reload view
