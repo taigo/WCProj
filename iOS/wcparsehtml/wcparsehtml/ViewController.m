@@ -61,8 +61,22 @@
     NSMutableArray *jsonTeams = [self getTeams:matchs];
     NSMutableArray *jsonMatchs = [self getMatchs:matchs];
     
-    NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:_groups, @"groups", jsonTeams, @"teams", jsonMatchs, @"matchs", nil];
-    [self writeToFile:dataDic];
+//    // data for client
+//    NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:_groups, @"groups", jsonTeams, @"teams", jsonMatchs, @"matchs", nil];
+//    [self writeToFile:dataDic];
+    
+    // data for server
+    NSMutableArray *scoresInfo = [NSMutableArray array];
+    for (NSDictionary *dic in jsonMatchs) {
+        NSMutableDictionary *scoreDic = [NSMutableDictionary dictionary];
+        [scoreDic setObject:dic[kDataTeamHome] forKey:kDataTeamHome];
+        [scoreDic setObject:dic[kDataTeamAway] forKey:kDataTeamAway];
+        [scoreDic setObject:dic[@"matchid"] forKey:@"matchid"];
+        [scoreDic setObject:@[] forKey:@"score"];
+        [scoreDic setObject:dic[kDataDaytimeUTC] forKey:kDataDaytimeUTC];
+        [scoresInfo addObject:scoreDic];
+    }
+    [self writeToFile:scoresInfo];
 }
 
 -(void)writeToFile:(NSDictionary*)dataDic

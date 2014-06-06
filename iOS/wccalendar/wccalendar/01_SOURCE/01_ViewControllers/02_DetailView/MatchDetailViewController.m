@@ -286,7 +286,7 @@
     localNotification.userInfo = infoDict;
     
     // set sound
-    localNotification.soundName = @"We_Are_One.mp3";
+    localNotification.soundName = @"sound.mp3";
     localNotification.applicationIconBadgeNumber = 0;
     
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];

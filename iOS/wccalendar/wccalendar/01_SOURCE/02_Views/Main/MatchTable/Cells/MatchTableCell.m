@@ -50,18 +50,21 @@
         [self addSubview:_team1_NameLbl];
         
         // score/time label
-        _timeLbl = [[UILabel alloc] initWithFrame:CGRectMake(160, 15, 50.0f, 30.0f)];
+        _timeLbl = [[UILabel alloc] initWithFrame:CGRectMake(160, 15, 55.0f, 30.0f)];
         _timeLbl.font = [UIFont fontWithName:FONT_APP_REGULAR size:17.0f];
         _timeLbl.textColor = [UIColor darkGrayColor];
         _timeLbl.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_timeLbl];
+//        _timeLbl.backgroundColor = [UIColor greenColor];
         
         // team2's name label
-        _team2_NameLbl = [[UILabel alloc] initWithFrame:CGRectMake(230, 15, 45.0f, 30.0f)];
+        _team2_NameLbl = [[UILabel alloc] initWithFrame:CGRectMake(220, 15, 45.0f, 30.0f)];
         _team2_NameLbl.font = [UIFont fontWithName:FONT_APP_REGULAR size:17.0f];
         _team2_NameLbl.textColor = [UIColor blackColor];
-        _timeLbl.textAlignment = NSTextAlignmentRight;
+        _team2_NameLbl.textAlignment = NSTextAlignmentRight;
         [self addSubview:_team2_NameLbl];
+//        _team2_NameLbl.backgroundColor = [UIColor redColor];
+        
         // team2's image
         _team2_ImgView = [[UIImageView alloc] initWithFrame:CGRectMake(274, 18, 35, 23)];
         _team2_ImgView.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -72,8 +75,9 @@
         [self addSubview:_team2_ImgView];
         
         // alarm button
-        _alarmBtn = [[UIButton alloc] initWithFrame:CGRectMake(163, 2, 50, 35)];
+        _alarmBtn = [[UIButton alloc] initWithFrame:CGRectMake(162, 2, 50, 35)];
         _alarmBtn.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
+        _alarmBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
         [self addSubview:_alarmBtn];
         [_alarmBtn addTarget:self action:@selector(alarmBtnTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
         
